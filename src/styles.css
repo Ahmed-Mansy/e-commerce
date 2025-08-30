@@ -1,0 +1,71 @@
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+:root {
+    --main-color: #8b5e35;
+    --second-color: #9b7e5c;
+    --text-color: #090f41;
+    --secondText-color: #9D9DAA;
+    --_3rdText-color: #C0C0C0;
+
+}
+
+body {
+    font-family: "Edu NSW ACT Cursive", cursive;
+}
+
+@theme {
+    --color-mainColor: var(--main-color);
+    --color-secondColor: var(--second-color);
+    --color-textColor: var(--text-color);
+    --color-2ndTextColor: #9D9DAA;
+    --color-3rdTextColor: #C0C0C0;
+    --color-bgColor: #F6F6F6;
+    --color-cardColor: ##FFFFFF;
+    --color-reviewColor: #FFC000;
+    --color-errorColor: #D00439;
+    --color-bgFooterColor: #2E2E2E;
+
+}
+
+.btn-main {
+    padding: 12px 24px;
+    background-color: var(--main-color);
+    border-radius: 10px;
+
+}
+
+.active {
+    color: var(--main-color);
+}
+
+@layer components {
+    .mainBtn {
+        @apply text-blue-700 hover:text-white border border-mainColor hover:bg-mainColor focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800
+    }
+
+    .mainBtn2 {
+        @apply text-white bg-mainColor hover:bg-secondColor focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
+    }
+
+    .myShadow {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+}
+
+
+
+.fa-solid.fa-heart {
+    display: none;
+}
+
+.myParent:hover .fa-solid.fa-heart {
+    display: block;
+}
+
+.myParent:hover .fa-regular.fa-heart {
+    display: none;
+}
