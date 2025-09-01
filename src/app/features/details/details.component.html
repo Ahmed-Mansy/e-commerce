@@ -1,8 +1,8 @@
 <section class="py-14">
     <div class="container mx-auto">
-        <h1 class="text-mainColor text-3xl mb-4 capitalize text-center">product details</h1>
-        <div class="grid sm:grid-cols-12 items-center gap-5 p-15">
-            <div class="col-span-3">
+        <h1 class="text-mainColor text-3xl mb-2 capitalize text-center">product details</h1>
+        <div class="grid xs:grid-cols-12 items-center gap-5 p-15">
+            <div class="xs:col-span-12 xs:w-9/12 md:col-span-6  xl:col-span-3 mx-auto">
                 <div class="myShadow">
                     <owl-carousel-o [options]="productOptions">
 
@@ -15,13 +15,13 @@
                     </owl-carousel-o>
                 </div>
             </div>
-            <div class="col-span-9 p-5">
-                <h2 class="text-2xl">{{productDetails.title}}</h2>
+            <div class="xs:col-span-12 md:col-span-6  xl:col-span-9 p-5">
+                <h2 class="text-2xl font-semibold">{{productDetails.title}}</h2>
                 <p class="text-gray-700 text-sm my-2">{{productDetails.description}}</p>
                 <span>{{productDetails.category.name}}</span>
 
-                <div class="flex items-center justify-between">
-                    <span>{{productDetails.price}}EGP</span>
+                <div class="flex items-center justify-between font-medium">
+                    <span class="">{{productDetails.price|currency:'EUR'}}</span>
                     <span>
                         <i class="fas fa-star text-yellow-500"></i>
                         {{productDetails.ratingsAverage}}

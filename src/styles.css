@@ -32,18 +32,25 @@ body {
 
 }
 
-.btn-main {
-    padding: 12px 24px;
-    background-color: var(--main-color);
-    border-radius: 10px;
 
-}
 
 .active {
     color: var(--main-color);
 }
 
+
+@theme {
+    --breakpoint-xs: 30rem;
+}
+
 @layer components {
+    .btn-main {
+        padding: 12px 24px;
+        background-color: var(--main-color);
+        border-radius: 10px;
+
+    }
+
     .mainBtn {
         @apply text-blue-700 hover:text-white border border-mainColor hover:bg-mainColor focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800
     }

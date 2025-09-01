@@ -3,10 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductDetailsService } from './services/product-details.service';
 import { Product } from '../home/models/product.interface';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-details',
-  imports: [CarouselModule ],
+  imports: [CarouselModule,CurrencyPipe ],
 templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })
