@@ -26,6 +26,6 @@ export const routes: Routes = [
         {path:'brands', component:BrandsComponent, title:'Brands Page'},
         {path:'checkout', component:CheckoutComponent, title:'Checkout Page'},
         {path:'details/:slug/:id', component:DetailsComponent, title:'Details Page'},
+        {path:'**',component:NotfoundComponent, title:'NotFound Page'}
     ]},
-    {path:'**',component:NotfoundComponent, title:'NotFound Page'}
 ];
