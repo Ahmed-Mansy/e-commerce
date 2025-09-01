@@ -1,1 +1,17 @@
-<p>popular-categories works!</p>
+<section class="py-14">
+    <div class="container mx-auto">
+        <h2 class="text-4xl capitalize mb-4">shop popular categorires</h2>
+        <owl-carousel-o [options]="categroriesOptions">
+
+            @for (category of categoriesList; track category._id) {
+            <ng-template carouselSlide [id]="category._id">
+                <div class="border border-mainColor rounded p-2">
+                    <img [src]="category.image" [alt]="category.name" [title]="category.slug" class="w-full h-[250px]">
+                    <h3 class="mt-2">{{category.name}}</h3>
+                </div>
+            </ng-template>
+            }
+
+        </owl-carousel-o>
+    </div>
+</section>

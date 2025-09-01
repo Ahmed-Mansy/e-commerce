@@ -19,7 +19,7 @@ ngOnInit(): void {
 }
 
   getAllProductsData():void{
-    this.productsService.getAllData().subscribe({
+    this.productsService.getAllProducts().subscribe({
       next:(res)=>{
         this.productList = res.data
       },

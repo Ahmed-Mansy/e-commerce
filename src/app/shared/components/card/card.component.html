@@ -3,22 +3,24 @@
         <i class="fa-solid fa-heart text-2xl text-mainColor  absolute top-1/2 left-1/2 -translate-1/2 "></i>
         <i class="fa-regular fa-heart text-2xl text-mainColor  absolute top-1/2 left-1/2 -translate-1/2 "></i>
     </div>
-    <div class="myImg p-3 pb-0">
-        <img [src]="product.imageCover" height="150px" class="w-full rounded" [alt]="product.title">
+    <div [routerLink]="['/details', product.slug, product.id]" class="cursor-pointer p-3 pb-0">
+        <div class="myImg">
+            <img [src]="product.imageCover" height="150px" class="w-full rounded" [alt]="product.title">
 
-    </div>
-    <div class="content p-3">
-        <h3 class="font-medium mb-1">{{product.category.name}}</h3>
-        <!-- <h4 class="my-2">{{product.title}}</h4> -->
-        <span class="font-medium">
-            <i class="fas fa-star text-yellow-400"></i>
-            {{product.ratingsAverage}}
-        </span>
-        <div class="flex justify-between items-center my-2 ">
-            <span class="font-bold text-mainColor">{{product.price }} EGP</span>
-            <span><i
-                    class="fa-solid fa-square-plus text-mainColor cursor-pointer text-4xl hover:text-secondColor transition-all duration-300"></i></span>
+        </div>
+        <div class="content">
+            <h3 class="font-medium mb-1">{{product.category.name}}</h3>
+            <!-- <h4 class="my-2">{{product.title}}</h4> -->
+            <span class="font-medium">
+                <i class="fas fa-star text-yellow-400"></i>
+                {{product.ratingsAverage}}
+            </span>
+
         </div>
     </div>
-
+    <div class="flex justify-between items-center my-2 p-3 pt-0">
+        <span class="font-bold text-mainColor">{{product.price }} EGP</span>
+        <span><i
+                class="fa-solid fa-square-plus text-mainColor cursor-pointer text-4xl hover:text-secondColor transition-all duration-300"></i></span>
+    </div>
 </div>
