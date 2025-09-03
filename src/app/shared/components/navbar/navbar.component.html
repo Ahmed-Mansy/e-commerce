@@ -42,7 +42,7 @@
             </ul>
             }
             <ul
-                class="capitalize ms-auto font-medium flex flex-row xs:items-center  p-4 md:p-0 mt-4 border  rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                class="capitalize ms-auto font-medium flex flex-row xs:items-center  p-4 md:p-0 mt-4 border  rounded-lg  md:flex-row md:space-x-5 rtl:space-x-reverse md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 @if (isLogin === false) {
                 <li>
                     <a routerLink='login'
@@ -55,9 +55,17 @@
                 </li>
                 }
                 @else {
+
+                <li>
+                    <a routerLink='wishlist' routerLinkActive="active"
+                        class="block py-2 px-2 text-2ndTextColor hover:text-mainColor rounded-sm md:bg-transparent  md:p-0 dark:text-white"
+                        aria-current="page">
+                        <i class="fa-regular fa-heart text-2xl "></i>
+                    </a>
+                </li>
                 <li>
                     <a routerLink='cart' routerLinkActive="active"
-                        class="block py-2 px-3 text-2ndTextColor hover:text-mainColor rounded-sm md:bg-transparent  md:p-0 dark:text-white"
+                        class="block py-2 px-2 text-2ndTextColor hover:text-mainColor rounded-sm md:bg-transparent  md:p-0 dark:text-white"
                         aria-current="page">
                         <i class="fas fa-cart-shopping text-2xl"></i>
                     </a>
