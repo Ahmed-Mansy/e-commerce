@@ -4,10 +4,12 @@ import { CardComponent } from "../../shared/components/card/card.component";
 import { Product } from '../home/models/product.interface';
 import { ProductsService } from '../home/services/products.service';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SearchPipe } from '../../shared/pipes/search-pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
-  imports: [CardComponent, NgxPaginationModule],
+  imports: [CardComponent, NgxPaginationModule, SearchPipe, FormsModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
@@ -21,21 +23,22 @@ export class ProductsComponent implements OnInit {
   pageSize!: number;
   p: number = 1; // default
   total!: number;
+  text: string = "";
 
   ngOnInit(): void {
     // read page number from query param (if exists)
     this.route.queryParams.subscribe(params => {
       if (params['page']) {
-      this.p = +params['page'];
-    } else {
-      // لو مفيش → خليها 1 وحدث الرابط
-      this.p = 1;
-      this.router.navigate([], {
-        relativeTo: this.route,
-        queryParams: { page: this.p },
-        queryParamsHandling: 'merge'
-      });
-    }
+        this.p = +params['page'];
+      } else {
+        // لو مفيش → خليها 1 وحدث الرابط
+        this.p = 1;
+        this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams: { page: this.p },
+          queryParamsHandling: 'merge'
+        });
+      }
 
       this.getAllProductsData(this.p);
     });
