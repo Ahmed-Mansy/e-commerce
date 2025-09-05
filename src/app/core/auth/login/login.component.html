@@ -1,71 +1,20 @@
 <section class="py-2">
 
-    <div class="bg-white border border-bgColor myShadow md:w-1/2 mx-auto my-14 p-8">
-        <h1 class="text-center mb-3 font-light py-5 text-2xl text-mainColor">Login</h1>
+    <div class="bg-white border border-bgColor myShadow md:w-1/2 mx-auto my-14 p-8 rounded-2xl">
+        <h1 class="text-center mb-3 font-light py-5 text-2xl  text-mainColor">Login</h1>
 
         <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
 
 
-            <div class="relative mb-4 z-0">
-                <input formControlName="email" type="email" id="email" class="main-input peer" placeholder=" " />
-                <label for="email" class="main-label">Email</label>
-
-                @let emailControl = loginForm.get('email');
-                @if (emailControl?.errors && emailControl?.touched) {
-                <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
-                    role="alert">
-
-                    <span class="sr-only">Danger</span>
-                    <div>
-
-                        <ul class="mt-1.5 list-disc list-inside">
-                            @if (emailControl?.getError('required')) {
-                            <li> Input is required </li>
-                            }
-                            @if (emailControl?.getError('email')) {
-                            <li> Please enter a valid email address</li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-                }
-
-            </div>
-
-            <div class="relative mb-4 z-0">
-                <input formControlName="password" type="password" id="password" class="main-input peer"
-                    placeholder=" " />
-                <label for="password" class="main-label capitalize">password</label>
-                @let passwordControl = loginForm.get('password');
-                @if (passwordControl?.errors && passwordControl?.touched ) {
-                <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
-                    role="alert">
-
-                    <span class="sr-only">Danger</span>
-                    <div>
-
-                        <ul class="mt-1.5 list-disc list-inside">
-                            @if (passwordControl?.getError('required')) {
-                            <li> Input is required </li>
-                            }
-
-                            @if (passwordControl?.getError('pattern')) {
-                            <li> Please enter a valid password</li>
-
-                            <!-- <li> Custom field should match the pattern </li> -->
-                            }
-
-                        </ul>
-                    </div>
-                </div>
-                }
-
-            </div>
+            <app-input [control]="loginForm.get('email')" [typeInput]="'email'" [idInput]="'email'"
+                [labelInput]="'email'"></app-input>
+            <app-input [control]="loginForm.get('password')" [idInput]="'password'" [labelInput]="'password'">
+                Please enter a valid password
+            </app-input>
 
 
 
-            <button [disabled]="isLoading"
-                class="disabled:cursor-not-allowed btn cursor-pointer w-full py-4 mt-5 text-lg ">Login
+            <button class="disabled:cursor-not-allowed btn cursor-pointer w-full py-4 mt-5 text-lg ">Login
                 @if (isLoading) {
                 <span> <i class="fas fa-spinner animate-spin"></i> </span>
                 }

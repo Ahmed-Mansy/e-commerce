@@ -1,18 +1,20 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 
-import {provideAnimations} from "@angular/platform-browser/animations"
+import { provideAnimations } from "@angular/platform-browser/animations"
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes,withInMemoryScrolling({"scrollPositionRestoration":'top'})), 
+    provideRouter(routes, withInMemoryScrolling({ "scrollPositionRestoration": 'top' })),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
-    provideAnimations()
+    provideAnimations(),
+    importProvidersFrom(CookieService),
   ]
 };

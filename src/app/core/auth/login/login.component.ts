@@ -2,10 +2,13 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { InputComponent } from "../../../shared/components/input/input.component";
+import { Subscription } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, InputComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -14,11 +17,11 @@ export class LoginComponent implements OnInit {
   private readonly authService = inject(AuthService)
   private readonly fb = inject(FormBuilder)
   private readonly router = inject(Router)
+  private readonly cookieService = inject(CookieService)
 
-
+  subscription: Subscription = new Subscription;
   msgError: string = '';
   isLoading: boolean = false
-
   loginForm!: FormGroup
 
   ngOnInit(): void {
@@ -36,12 +39,17 @@ export class LoginComponent implements OnInit {
   submitForm() {
 
     if (this.loginForm.valid) {
+
+      this.subscription.unsubscribe();
+
       this.isLoading = true
-      this.authService.loginForm(this.loginForm.value).subscribe({
+      this.subscription = this.authService.loginForm(this.loginForm.value).subscribe({
         next: (res) => {
           console.log(res);
           if (res.message === "success") {
             this.msgError = '';
+            this.cookieService.set('token', res.token)
+            this.authService.decodeToken();
             setTimeout(() => {
               this.router.navigate(['/home'])
             }, 1000);

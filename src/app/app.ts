@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, PLATFORM_ID, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from "./shared/components/footer/footer.component";
 
@@ -9,5 +9,5 @@ import { FooterComponent } from "./shared/components/footer/footer.component";
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('E-COMMERCE');
+
 }

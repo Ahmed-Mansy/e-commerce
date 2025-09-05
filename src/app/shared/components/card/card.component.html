@@ -10,7 +10,7 @@
         </div>
         <div class="content">
             <h3 class="font-medium mb-1">{{product.category.name}}</h3>
-            <!-- <h4 class="my-2">{{product.title}}</h4> -->
+            <h4 class="my-2">{{product.title | onSale}}</h4>
             <span class="font-medium">
                 <i class="fas fa-star text-yellow-400"></i>
                 {{product.ratingsAverage}}

@@ -2,11 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms"
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { InputComponent } from "../../../shared/components/input/input.component";
 
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, InputComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -18,7 +19,6 @@ export class RegisterComponent implements OnInit {
 
   msgError: string = '';
   isLoading: boolean = false
-  flag: boolean = true;
 
 
   registerForm!: FormGroup
@@ -41,10 +41,14 @@ export class RegisterComponent implements OnInit {
 
   confirmPassword(group: AbstractControl) {
 
-    let password = group.get('password')
-    let rePassword = group.get('rePassword')
+    if (group.get('password')?.value === group.get('rePassword')?.value) {
+      return null
+    }
 
-    return password?.value === rePassword?.value ? null : { mismatch: true }
+    else {
+      group.get('rePassword')?.setErrors({ mismatch: true })
+    }
+    return { mismatch: true }
 
   }
 
