@@ -12,6 +12,7 @@ export class InputComponent {
   @Input() control: any;
   @Input() typeInput!: string;
   @Input() idInput!: string;
+  @Input() element: string = 'input';
   @Input() labelInput!: string;
 
   flag: boolean = true;

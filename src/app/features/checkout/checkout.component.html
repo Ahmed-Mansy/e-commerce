@@ -1,1 +1,22 @@
-<p>checkout works!</p>
+<section class="p-1">
+    <div class="p-6 my-10  bg-white myShadow md:w-1/2 container mx-auto ">
+        <h1 class="text-center text-4xl text-mainColor my-4">Checkout</h1>
+
+        <form [formGroup]="checkOutForm">
+
+            <app-input [element]="'text'" [control]="checkOutForm.get('shippingAddress')?.get('details')"
+                [idInput]="'details'" [labelInput]="'details'"></app-input>
+
+            <app-input [element]="'input'" [control]="checkOutForm.get('shippingAddress')?.get('phone')"
+                [idInput]="'phone'" [typeInput]="'tel'" [labelInput]="'phone'"> Accept only egypt numbers </app-input>
+
+            <app-input [element]="'input'" [control]="checkOutForm.get('shippingAddress')?.get('city')"
+                [idInput]="'city'" [typeInput]="'text'" [labelInput]="'city'"></app-input>
+
+            <div class="flex items-center space-x-10">
+                <button (click)="submitForm()" class="btn capitalize w-full py-4">payment by visa </button>
+                <button class="btn capitalize w-full py-4">payment by cash </button>
+            </div>
+        </form>
+    </div>
+</section>

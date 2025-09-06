@@ -1,1 +1,82 @@
-<p>cart works!</p>
+<section class="p-8">
+
+    <div class="container mx-auto">
+        <div class="grid sm:grid-cols-12 gap-10 items-start">
+
+            <div class="col-span-8">
+                <h1 class="text-5xl">Cart
+                    <span class="text-rose-500 text-lg"> {{cartDetails.products.length}} items</span>
+                </h1>
+                @for (item of cartDetails.products; track item.product.id) {
+
+                <div class="parent bg-white p-4 rounded-2xl myShadow my-7">
+
+                    <div class="grid sm:grid-cols-12 items-center">
+                        <div class="col-span-1 p-3.5">
+                            <img [src]="item.product.imageCover" class="w-full" [alt]="item.product.title">
+                        </div>
+
+                        <div class="col-span-11">
+
+                            <div class="flex justify-between items-center">
+
+                                <div class="content">
+                                    <h3 class="text-lg py-2"> {{item.product.title}} </h3>
+
+                                    <div class="flex items-center space-x-7">
+                                        <div
+                                            class="flex items-center space-x-11 py-1 px-4 border border-mainColor bg-gray-200 rounded-lg ">
+                                            <button (click)="updateProduct(item.product.id, item.count-1)"
+                                                class="cursor-pointer hover:text-mainColor">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                            <span> {{item.count}} </span>
+                                            <button (click)="updateProduct(item.product.id, item.count+1)"
+                                                class="cursor-pointer hover:text-mainColor"><i
+                                                    class="fas fa-plus"></i></button>
+
+                                        </div>
+                                        <button (click)="removeItem(item.product.id)"
+                                            class="cursor-pointer text-mainColor hover:text-red-600"> <i
+                                                class="fas fa-trash-can text-2xl"></i></button>
+                                    </div>
+
+                                </div>
+                                <div class="price">
+                                    <h5 class="font-medium"> {{item.price * item.count| currency:'EUR'}} </h5>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                }
+
+
+
+            </div>
+
+
+            <div class="col-span-4 bg-white myShadow p-6 rounded-2xl">
+
+                <h2 class="capitalize text-2xl">Order summary</h2>
+
+                <div class="flex items-center justify-between my-4">
+                    <h3 class="text-lg font-medium">Price</h3>
+                    <h4 class="font-medium"> {{cartDetails.totalCartPrice |currency:'EUR'}} </h4>
+                </div>
+
+                <button [routerLink]="['/checkout',cartDetails._id]" class="btn capitalize w-full"> procced to
+                    checkout</button>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</section>
