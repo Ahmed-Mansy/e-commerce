@@ -69,7 +69,8 @@
                     <h4 class="font-medium"> {{cartDetails.totalCartPrice |currency:'EUR'}} </h4>
                 </div>
 
-                <button [routerLink]="['/checkout',cartDetails._id]" class="btn capitalize w-full"> procced to
+                <button [routerLink]="['/checkout',cartDetails._id]" (click)="animateFun()"
+                    class="btn capitalize w-full"> procced to
                     checkout</button>
 
             </div>

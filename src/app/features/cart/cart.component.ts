@@ -1,9 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from './services/cart.service';
 import { Cart } from './models/cart.interface';
 import { CurrencyPipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { RouterLink } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-cart',
@@ -11,10 +12,11 @@ import { RouterLink } from '@angular/router';
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnDestroy {
 
   private readonly cartService = inject(CartService)
   private readonly toastrService = inject(ToastrService)
+  private readonly ngxSpinnerService = inject(NgxSpinnerService)
 
   cartDetails: Cart = {} as Cart
 
@@ -40,6 +42,7 @@ export class CartComponent implements OnInit {
       next: (res) => {
         this.cartDetails = res.data;
         this.toastrService.error('Item deleted successfully')
+        this.cartService.removeFromCart();
 
       },
       error: (err) => {
@@ -59,5 +62,16 @@ export class CartComponent implements OnInit {
         console.log(err);
       }
     })
+  }
+
+  animateFun(): void {
+    this.ngxSpinnerService.show()
+
+  }
+  ngOnDestroy(): void {
+    setTimeout(() => {
+      this.ngxSpinnerService.hide()
+
+    }, 1400);
   }
 }

@@ -67,6 +67,7 @@ export class DetailsComponent implements OnInit {
   addProductItemToCart(id: string): void {
     this.cartService.addProductToCart(id).subscribe({
       next: (res) => {
+        this.cartService.addToCart();
         console.log(res);
       },
       error: (err) => {

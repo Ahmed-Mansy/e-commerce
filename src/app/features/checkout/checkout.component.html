@@ -14,8 +14,10 @@
                 [idInput]="'city'" [typeInput]="'text'" [labelInput]="'city'"></app-input>
 
             <div class="flex items-center space-x-10">
-                <button (click)="submitForm()" class="btn capitalize w-full py-4">payment by visa </button>
-                <button class="btn capitalize w-full py-4">payment by cash </button>
+                <button (click)="submitForm($event)" id="visa" class="btn capitalize w-full py-4">payment by visa
+                </button>
+                <button (click)="submitForm($event)" id="cash" class="btn capitalize w-full py-4">payment by cash
+                </button>
             </div>
         </form>
     </div>

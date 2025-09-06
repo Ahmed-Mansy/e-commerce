@@ -6,6 +6,7 @@ import { ProductsService } from '../home/services/products.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SearchPipe } from '../../shared/pipes/search-pipe';
 import { FormsModule } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-products',
@@ -18,6 +19,7 @@ export class ProductsComponent implements OnInit {
   private readonly productsService = inject(ProductsService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly ngxSpinnerService = inject(NgxSpinnerService);
 
   productList: Product[] = [];
   pageSize!: number;
@@ -45,14 +47,22 @@ export class ProductsComponent implements OnInit {
   }
 
   getAllProductsData(pageNum: number = 1): void {
+
     this.productsService.getAllProducts(pageNum).subscribe({
       next: (res) => {
         this.productList = res.data;
         this.pageSize = res.metadata.limit;
         this.p = res.metadata.currentPage;
         this.total = res.results;
+
+
       },
-      error: (err) => console.log(err)
+      error: (err) => {
+        console.log(err)
+
+
+      }
+
     });
   }
 

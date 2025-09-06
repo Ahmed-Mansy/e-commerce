@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -10,19 +10,27 @@ import { CookieService } from 'ngx-cookie-service';
 export class CartService {
   private readonly httpClient = inject(HttpClient)
   private readonly cookieService = inject(CookieService)
+  private cartCount = new BehaviorSubject<number>(0);
+  cartCount$ = this.cartCount.asObservable();
 
-  myHeaders = {
-    headers: {
-      token: this.cookieService.get('token')
-    }
-  };
+  addToCart(): void {
+    this.cartCount.next(this.cartCount.value + 1)
+  }
+  removeFromCart(): void {
+    this.cartCount.next(this.cartCount.value - 1)
+  }
+  resetCart() {
+    this.cartCount.next(0);
+  }
+
+
 
   addProductToCart(id: string): Observable<any> {
 
     return this.httpClient.post(environment.baseUrl + `cart`, {
       productId: id
     },
-      this.myHeaders
+
 
 
     )
@@ -30,13 +38,13 @@ export class CartService {
 
   getLoggedUserCart(): Observable<any> {
     return this.httpClient.get(environment.baseUrl + `cart`,
-      this.myHeaders
+
     )
   }
 
   removeSpecificCartItem(id: string): Observable<any> {
     return this.httpClient.delete(environment.baseUrl + `cart/${id}`,
-      this.myHeaders
+
     )
   }
 
@@ -45,13 +53,19 @@ export class CartService {
       {
         count: count
       },
-      this.myHeaders
+
     )
   }
 
-  checkoutSession(id: string | null, data: object): Observable<any> {
+  checkoutSessionVisa(id: string | null, data: object): Observable<any> {
 
-    return this.httpClient.post(environment.baseUrl + `orders/checkout-session/${id}?url=http://localhost:4200`, data, this.myHeaders)
+    return this.httpClient.post(environment.baseUrl + `orders/checkout-session/${id}?url=http://localhost:4200`, data,)
+  };
+
+
+  checkoutSessionCash(id: string | null, data: object): Observable<any> {
+
+    return this.httpClient.post(environment.baseUrl + `orders/${id}`, data,)
   }
 
 

@@ -26,6 +26,7 @@ export class CardComponent {
         console.log(res);
 
         if (res.status === "success") {
+          this.cartService.addToCart();
           this.toastrService.success(res.message, 'Trendy');
         }
       },

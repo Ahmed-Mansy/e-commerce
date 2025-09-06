@@ -42,11 +42,11 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
-  submitForm(): void {
-    if (this.checkOutForm.valid) {
+  submitForm(e: any): void {
 
-
-      this.cartService.checkoutSession(this.cardId, this.checkOutForm.value).subscribe({
+    if (this.checkOutForm.valid && e.target.id === 'visa') {
+      console.log('visa')
+      this.cartService.checkoutSessionVisa(this.cardId, this.checkOutForm.value).subscribe({
         next: (res) => {
           console.log(res);
           if (res.status === 'success') {
@@ -57,6 +57,15 @@ export class CheckoutComponent implements OnInit {
           console.log(err)
         }
       })
+    }
+    else if (this.checkOutForm.valid && e.target.id === 'cash') {
+      console.log('cash')
+      this.cartService.checkoutSessionCash(this.cardId, this.checkOutForm.value).subscribe({
+        next: (res) => {
+          console.log(res);
+        }
+      })
+
     }
   }
 

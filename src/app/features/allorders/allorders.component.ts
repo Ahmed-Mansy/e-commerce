@@ -2,10 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../core/auth/services/auth.service';
 import { OrdersService } from './services/orders.service';
 import { Order } from './models/order.interface';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-allorders',
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './allorders.component.html',
   styleUrl: './allorders.component.css'
 })
