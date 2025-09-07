@@ -8,8 +8,7 @@ import { ProductsComponent } from './features/products/products.component';
 import { CartComponent } from './features/cart/cart.component';
 import { CategoriesComponent } from './features/categories/categories.component';
 import { BrandsComponent } from './features/brands/brands.component';
-import { CheckoutComponent } from './features/checkout/checkout.component';
-import { DetailsComponent } from './features/details/details.component';
+
 import { NotfoundComponent } from './features/notfound/notfound.component';
 import { authGuard } from './core/guards/auth-guard';
 import { isLoggedGuard } from './core/guards/is-logged-guard';
