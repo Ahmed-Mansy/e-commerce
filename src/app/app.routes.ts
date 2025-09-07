@@ -13,6 +13,7 @@ import { NotfoundComponent } from './features/notfound/notfound.component';
 import { authGuard } from './core/guards/auth-guard';
 import { isLoggedGuard } from './core/guards/is-logged-guard';
 import { AllordersComponent } from './features/allorders/allorders.component';
+import { ForgotPaswordComponent } from './core/auth/forgot-pasword/forgot-pasword.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -20,6 +21,7 @@ export const routes: Routes = [
         path: '', component: AuthLayoutComponent, canActivate: [isLoggedGuard], children: [
             { path: 'login', component: LoginComponent, title: 'Login Page' },
             { path: 'register', component: RegisterComponent, title: 'Register Page' },
+            { path: 'forgot', component: ForgotPaswordComponent, title: 'Forgot Password Page' },
         ]
     },
     {

@@ -18,11 +18,25 @@ export class CartService {
   }
   removeFromCart(): void {
     this.cartCount.next(this.cartCount.value - 1)
+    if (this.cartCount.value === 0) {
+      this.resetCart()
+    }
   }
   resetCart() {
     this.cartCount.next(0);
   }
 
+  loadCart(): void {
+    this.getLoggedUserCart().subscribe({
+      next: (res) => {
+        if (res.status === 'success') {
+          const cartNum = res.data.products.length
+          console.log('cartserv == >', cartNum)
+          this.cartCount.next(cartNum);
+        }
+      }
+    })
+  }
 
 
   addProductToCart(id: string): Observable<any> {

@@ -23,12 +23,14 @@ export class CartComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getLoggedUserData()
+    this.cartService.loadCart();
+
   }
 
   getLoggedUserData(): void {
     this.cartService.getLoggedUserCart().subscribe({
       next: (res) => {
-        console.log(res.data);
+        console.log(`getLogged`, res.data);
         this.cartDetails = res.data;
       },
       error: (err) => {
@@ -43,6 +45,7 @@ export class CartComponent implements OnInit, OnDestroy {
         this.cartDetails = res.data;
         this.toastrService.error('Item deleted successfully')
         this.cartService.removeFromCart();
+        this.cartService.loadCart();
 
       },
       error: (err) => {
@@ -57,6 +60,10 @@ export class CartComponent implements OnInit, OnDestroy {
       next: (res) => {
         this.cartDetails = res.data;
         this.toastrService.info('Done')
+        if (this.cartDetails.products.length === 0) {
+          this.cartService.resetCart()
+        }
+        this.cartService.loadCart();
       },
       error: (err) => {
         console.log(err);

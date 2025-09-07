@@ -19,13 +19,17 @@ export class NavbarComponent {
   private readonly ngxSpinnerService = inject(NgxSpinnerService)
   private readonly cartService = inject(CartService)
   @Input({ required: true }) isLogin: boolean = true;
+
   cartCount = 0;
 
   ngOnInit(): void {
+    // this.cartService.loadCart();
+
 
     this.cartService.cartCount$.subscribe((count) => {
       this.cartCount = count
-    })
+      console.log('nav == >', this.cartCount)
+    });
 
 
     this.flowbiteService.loadFlowbite((flowbite) => {

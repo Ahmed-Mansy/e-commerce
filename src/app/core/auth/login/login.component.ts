@@ -1,14 +1,15 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { InputComponent } from "../../../shared/components/input/input.component";
 import { Subscription } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { CartService } from '../../../features/cart/services/cart.service';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, InputComponent],
+  imports: [ReactiveFormsModule, InputComponent, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
   private readonly fb = inject(FormBuilder)
   private readonly router = inject(Router)
   private readonly cookieService = inject(CookieService)
+  private readonly cartService = inject(CartService)
 
   subscription: Subscription = new Subscription;
   msgError: string = '';
@@ -50,6 +52,7 @@ export class LoginComponent implements OnInit {
             this.msgError = '';
             this.cookieService.set('token', res.token)
             this.authService.decodeToken();
+            this.cartService.loadCart()
             setTimeout(() => {
               this.router.navigate(['/home'])
             }, 1000);

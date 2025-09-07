@@ -5,7 +5,7 @@
 
             <div class="col-span-8">
                 <h1 class="text-5xl">Cart
-                    <span class="text-rose-500 text-lg"> {{cartDetails.products.length}} items</span>
+                    <span class="text-rose-500 text-lg"> {{cartDetails?.products?.length}} items</span>
                 </h1>
                 @for (item of cartDetails.products; track item.product.id) {
 
