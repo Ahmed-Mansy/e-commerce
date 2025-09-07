@@ -14,6 +14,7 @@ import { authGuard } from './core/guards/auth-guard';
 import { isLoggedGuard } from './core/guards/is-logged-guard';
 import { AllordersComponent } from './features/allorders/allorders.component';
 import { ForgotPaswordComponent } from './core/auth/forgot-pasword/forgot-pasword.component';
+import { SubCategoriesComponent } from './features/categories/sub-categories/sub-categories.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -32,6 +33,7 @@ export const routes: Routes = [
             { path: 'products', component: ProductsComponent, title: 'Products Page' },
             { path: 'cart', component: CartComponent, title: 'Cart Page' },
             { path: 'categories', component: CategoriesComponent, title: 'Categories Page' },
+            { path: 'categories/subCategories/:id/:slug', component: SubCategoriesComponent, title: 'SubCategory Page' },
             { path: 'brands', component: BrandsComponent, title: 'Brands Page' },
             { path: 'allorders', component: AllordersComponent, title: 'All Orders Page' },
             // { path: 'checkout/:id', component: CheckoutComponent,title: 'Checkout Page'  },

@@ -8,10 +8,13 @@ import { environment } from '../../../../environments/environment.development';
 })
 export class CategoriesService {
 
-  private readonly httpClient= inject(HttpClient)
+  private readonly httpClient = inject(HttpClient)
 
-  getAllcategories():Observable<any> {
+  getAllcategories(): Observable<any> {
     return this.httpClient.get(environment.baseUrl + `categories`)
   }
-  
+  getAllSubCategories(id: string | null): Observable<any> {
+    return this.httpClient.get(environment.baseUrl + `categories/${id}/subcategories`)
+  }
+
 }

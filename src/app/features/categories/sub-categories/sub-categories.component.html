@@ -1,0 +1,28 @@
+<section class="container mx-auto p-6">
+    <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">All Sub Categories of {{categoryName}} </h2>
+
+    <!-- Grid -->
+    @if (subCategriesList.length > 0) {
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+        @for (subcategory of subCategriesList; track subcategory._id) {
+        <div
+            class="bg-white shadow-lg rounded-2xl overflow-hidden transition transform hover:-translate-y-1 hover:shadow-2xl cursor-pointer">
+            <div class="p-4">
+                <h3 class="text-lg font-bold text-gray-800"> {{subcategory.name}} </h3>
+                <p class="text-sm text-gray-500"> {{subcategory.slug}} </p>
+            </div>
+        </div>
+        }
+
+
+
+
+    </div>
+
+    }
+
+    @else {
+    <h2 class="text-2xl text-center text-mainColor">no Sub categories</h2>
+    }
+</section>
