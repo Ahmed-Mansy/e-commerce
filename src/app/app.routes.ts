@@ -33,8 +33,18 @@ export const routes: Routes = [
             { path: 'categories', component: CategoriesComponent, title: 'Categories Page' },
             { path: 'brands', component: BrandsComponent, title: 'Brands Page' },
             { path: 'allorders', component: AllordersComponent, title: 'All Orders Page' },
-            { path: 'checkout/:id', component: CheckoutComponent, title: 'Checkout Page' },
-            { path: 'details/:slug/:id', component: DetailsComponent, title: 'Details Page' },
+            // { path: 'checkout/:id', component: CheckoutComponent,title: 'Checkout Page'  },
+            {
+                path: 'checkout/:id', title: 'Checkout Page',
+                loadComponent: () => import('./features/checkout/checkout.component').then(m => m.CheckoutComponent),
+                data: { renderMode: 'server' } // بدل prerender إلى server render
+            },
+            // { path: 'details/:slug/:id', component: DetailsComponent, title: 'Details Page' },
+            {
+                path: 'details/:slug/:id', title: 'Details Page',
+                loadComponent: () => import('./features/details/details.component').then(m => m.DetailsComponent),
+                data: { renderMode: 'server' }
+            },
             { path: '**', component: NotfoundComponent, title: 'NotFound Page' }
         ]
     },
