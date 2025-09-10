@@ -1,5 +1,5 @@
 <div class="card bg-white myShadow relative rounded-2xl ">
-    <div class="size-11 cursor-pointer rounded-full bg-white absolute top-3 right-3 myShadow myParent"
+    <div class="size-11 z-50 cursor-pointer rounded-full bg-white absolute top-3 right-3 myShadow myParent"
         (click)="toggleWishlist(product.id)">
 
         @if (isInWishlist(product.id)) {
@@ -12,7 +12,10 @@
     </div>
     <div [routerLink]="['/details', product.slug, product.id]" class="cursor-pointer p-3 pb-0">
         <div class="myImg">
-            <img [src]="product.imageCover" height="150px" class="w-full rounded" [alt]="product.title">
+            <div class="img-wrapper">
+                <img appImageLoader [src]="product.imageCover" class="w-full rounded" [alt]="product.title"
+                    height="150px">
+            </div>
 
         </div>
         <div class="content">
@@ -27,6 +30,7 @@
     </div>
     <div class="flex justify-between items-center my-2 p-3 pt-0">
         <span class="font-bold text-mainColor">{{product.price|currency:'EGP '}}</span>
+
         <span><i (click)="addProductItemToCart(product.id)"
                 class="fa-solid fa-square-plus text-mainColor cursor-pointer text-4xl hover:text-secondColor transition-all duration-300"></i></span>
     </div>

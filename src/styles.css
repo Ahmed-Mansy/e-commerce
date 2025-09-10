@@ -324,3 +324,53 @@ button.toast-close-button {
         width: 25em;
     }
 }
+
+
+
+/* image loading directive */
+
+
+.img-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.img-wrapper img {
+    object-fit: cover;
+}
+
+.img-wrapper img.show {
+    display: block;
+}
+
+/* overlay pic */
+.img-wrapper.loading::before {
+    content: '';
+    position: absolute;
+
+}
+
+/* spinner */
+.img-wrapper.loading::after {
+    content: '';
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ccc;
+    border-top: 5px solid var(--main-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    z-index: 3;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}

@@ -8,14 +8,16 @@ import { CartService } from '../../../features/cart/services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { WishlistService } from '../../../features/wish-list/services/wishlist.service';
 import { Wishlist } from '../../../features/wish-list/models/wishlist.interface';
+import { ImageLoader } from '../../directives/image-loader';
 
 @Component({
   selector: 'app-card',
-  imports: [RouterLink, CurrencyPipe, TermPipe],
+  imports: [RouterLink, CurrencyPipe, TermPipe, ImageLoader],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
 })
 export class CardComponent implements OnInit {
+
   @Input({ required: true }) product: Product = {} as Product;
 
   private readonly cartService = inject(CartService);

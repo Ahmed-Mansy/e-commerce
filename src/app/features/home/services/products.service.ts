@@ -10,8 +10,8 @@ export class ProductsService {
 
   private readonly httpClient = inject(HttpClient)
 
-  getAllProducts(pageNum:number = 1):Observable<any> {
+  getAllProducts(pageNum: number = 1): Observable<any> {
     return this.httpClient.get(environment.baseUrl + `products?page=${pageNum}`)
   }
-  
+
 }
