@@ -15,6 +15,9 @@ import { isLoggedGuard } from './core/guards/is-logged-guard';
 import { AllordersComponent } from './features/allorders/allorders.component';
 import { ForgotPaswordComponent } from './core/auth/forgot-pasword/forgot-pasword.component';
 import { SubCategoriesComponent } from './features/categories/sub-categories/sub-categories.component';
+import { CheckoutComponent } from './features/checkout/checkout.component';
+import { DetailsComponent } from './features/details/details.component';
+import { WishListComponent } from './features/wish-list/wish-list.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -36,18 +39,21 @@ export const routes: Routes = [
             { path: 'categories/subCategories/:id/:slug', component: SubCategoriesComponent, title: 'SubCategory Page' },
             { path: 'brands', component: BrandsComponent, title: 'Brands Page' },
             { path: 'allorders', component: AllordersComponent, title: 'All Orders Page' },
-            // { path: 'checkout/:id', component: CheckoutComponent,title: 'Checkout Page'  },
-            {
-                path: 'checkout/:id', title: 'Checkout Page',
-                loadComponent: () => import('./features/checkout/checkout.component').then(m => m.CheckoutComponent),
-                data: { renderMode: 'server' } // بدل prerender إلى server render
-            },
-            // { path: 'details/:slug/:id', component: DetailsComponent, title: 'Details Page' },
-            {
-                path: 'details/:slug/:id', title: 'Details Page',
-                loadComponent: () => import('./features/details/details.component').then(m => m.DetailsComponent),
-                data: { renderMode: 'server' }
-            },
+            { path: 'allorders', component: AllordersComponent, title: 'All Orders Page' },
+            { path: 'wishlist', component: WishListComponent, title: 'Wishlist Page' },
+            { path: 'checkout/:id', component: CheckoutComponent, title: 'Checkout Page' },
+            { path: 'details/:slug/:id', component: DetailsComponent, title: 'Details Page' },
+
+            // {
+            //     path: 'checkout/:id', title: 'Checkout Page',
+            //     loadComponent: () => import('./features/checkout/checkout.component').then(m => m.CheckoutComponent),
+            //     data: { renderMode: 'server' } // بدل prerender إلى server render
+            // },
+            // {
+            //     path: 'details/:slug/:id', title: 'Details Page',
+            //     loadComponent: () => import('./features/details/details.component').then(m => m.DetailsComponent),
+            //     data: { renderMode: 'server' }
+            // },
             { path: '**', component: NotfoundComponent, title: 'NotFound Page' }
         ]
     },

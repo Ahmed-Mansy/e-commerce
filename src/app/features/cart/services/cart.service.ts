@@ -10,6 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class CartService {
   private readonly httpClient = inject(HttpClient)
   private readonly cookieService = inject(CookieService)
+
   private cartCount = new BehaviorSubject<number>(0);
   cartCount$ = this.cartCount.asObservable();
 
@@ -29,11 +30,7 @@ export class CartService {
   loadCart(): void {
     this.getLoggedUserCart().subscribe({
       next: (res) => {
-        if (res.status === 'success') {
-          const cartNum = res.data.products.length
-          console.log('cartserv == >', cartNum)
-          this.cartCount.next(cartNum);
-        }
+        this.cartCount.next(res.numOfCartItems)
       }
     })
   }

@@ -6,6 +6,7 @@ import { InputComponent } from "../../../shared/components/input/input.component
 import { Subscription } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { CartService } from '../../../features/cart/services/cart.service';
+import { WishlistService } from '../../../features/wish-list/services/wishlist.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
   private readonly fb = inject(FormBuilder)
   private readonly router = inject(Router)
   private readonly cookieService = inject(CookieService)
-  private readonly cartService = inject(CartService)
+  // private readonly cartService = inject(CartService)
+  private readonly wishlistService = inject(WishlistService)
 
   subscription: Subscription = new Subscription;
   msgError: string = '';
@@ -52,7 +54,8 @@ export class LoginComponent implements OnInit {
             this.msgError = '';
             this.cookieService.set('token', res.token)
             this.authService.decodeToken();
-            this.cartService.loadCart()
+            // this.cartService.loadCart()
+            this.wishlistService.loadWishlist();
             setTimeout(() => {
               this.router.navigate(['/home'])
             }, 1000);

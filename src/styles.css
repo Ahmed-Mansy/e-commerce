@@ -79,7 +79,7 @@ body {
 
 
 
-.fa-solid.fa-heart {
+/* .fa-solid.fa-heart {
     display: none;
 }
 
@@ -93,7 +93,7 @@ body {
 
 .owl-theme .owl-dots .owl-dot span {
     width: 1.4rem;
-}
+} */
 
 
 
@@ -269,7 +269,7 @@ button.toast-close-button {
 }
 
 .toast-success {
-    background-color: #5de75d;
+    background-color: #44d744;
 }
 
 .toast-error {

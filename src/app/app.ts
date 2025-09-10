@@ -1,7 +1,7 @@
 import { Component, inject, PLATFORM_ID, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { FooterComponent } from "./shared/components/footer/footer.component";
-import { NgxSpinnerComponent } from "ngx-spinner";
+import { NgxSpinnerComponent, NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-root',
@@ -10,5 +10,4 @@ import { NgxSpinnerComponent } from "ngx-spinner";
   styleUrl: './app.css'
 })
 export class App {
-
 }
