@@ -10,37 +10,41 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         @for (product of wishList; track product.id) {
         <div class="bg-white rounded-2xl shadow-md p-4 relative">
-            <!-- Image -->
-            <img [src]="product.imageCover" [alt]="product.title" class="w-full object-cover rounded-lg">
+            <div class="cursor-pointer" [routerLink]="['/details', product.slug ,product.id]">
+                <!-- Image -->
+                <img [src]="product.imageCover" [alt]="product.title" class="w-full object-cover rounded-lg">
 
-            <!-- Content -->
-            <div class="mt-3">
-                <h3 class="font-medium text-lg">{{ product.title }}</h3>
-                <p class="text-sm text-gray-500">{{ product.brand.name }}</p>
+                <!-- Content -->
+                <div class="mt-3">
+                    <h3 class="font-medium text-lg">{{ product.title }}</h3>
+                    <p class="text-sm text-gray-500">{{ product.brand.name }}</p>
 
-                <!-- Price -->
-                <div class="flex items-center justify-between mt-2">
-                    <div>
-                        <span class="font-bold text-mainColor">{{ product.price | currency:'EGP ' }}</span>
-                        @if (product.priceAfterDiscount) {
-                        <span class="line-through text-gray-400 ml-2">
-                            {{ product.priceAfterDiscount | currency:'EGP ' }}
-                        </span>
-                        }
-                    </div>
-                    <!-- Rating -->
-                    <div class="flex items-center mt-2">
+                    <!-- Price -->
+                    <div class="flex items-center justify-between mt-2">
+                        <div>
+                            <span class="font-bold text-mainColor">{{ product.price | currency:'EGP ' }}</span>
+                            @if (product.priceAfterDiscount) {
+                            <span class="line-through text-gray-400 ml-2">
+                                {{ product.priceAfterDiscount | currency:'EGP ' }}
+                            </span>
+                            }
+                        </div>
+                        <!-- Rating -->
+                        <div class="flex items-center mt-2">
 
-                        <i class="fas fa-star text-yellow-400 mr-1"></i>
-                        <span>{{ product.ratingsAverage }}</span>
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span>{{ product.ratingsAverage }}</span>
 
+
+                        </div>
 
                     </div>
 
                 </div>
 
-                <button class="btn capitalize w-full">add to cart</button>
             </div>
+
+            <button class="btn capitalize w-full">add to cart</button>
 
             <!-- Remove Button -->
             <button (click)="removeItem(product._id)"

@@ -33,7 +33,7 @@ export class ProductsComponent implements OnInit {
       if (params['page']) {
         this.p = +params['page'];
       } else {
-        // لو مفيش → خليها 1 وحدث الرابط
+
         this.p = 1;
         this.router.navigate([], {
           relativeTo: this.route,

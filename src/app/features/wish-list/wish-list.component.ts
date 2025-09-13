@@ -3,10 +3,11 @@ import { WishlistService } from './services/wishlist.service';
 import { Wishlist } from './models/wishlist.interface';
 import { CurrencyPipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-wish-list',
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, RouterLink],
   templateUrl: './wish-list.component.html',
   styleUrl: './wish-list.component.css'
 })
