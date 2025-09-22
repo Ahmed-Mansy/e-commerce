@@ -2,7 +2,7 @@
     <div class="container mx-auto">
         <h1 class="text-mainColor text-3xl mb-2 capitalize text-center">product details</h1>
         <div class="grid xs:grid-cols-12 items-center gap-5 p-15">
-            <div class="xs:col-span-12 xs:w-9/12 md:col-span-6  xl:col-span-3 mx-auto">
+            <div class="xs:col-span-12 xs:w-9/12 md:col-span-6  xl:col-span-5 mx-auto">
                 <div class="myShadow">
                     <owl-carousel-o [options]="productOptions">
 
@@ -15,7 +15,7 @@
                     </owl-carousel-o>
                 </div>
             </div>
-            <div class="xs:col-span-12 md:col-span-6  xl:col-span-9 p-5">
+            <div class="xs:col-span-12 md:col-span-6  xl:col-span-7 p-5">
                 <h2 class="text-2xl font-semibold">{{productDetails.title}}</h2>
                 <p class="text-gray-700 text-sm my-2">{{productDetails.description}}</p>
                 <span>{{productDetails.category.name}}</span>

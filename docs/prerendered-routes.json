@@ -1,0 +1,15 @@
+{
+  "routes": {
+    "/e-commerce": {},
+    "/e-commerce/allorders": {},
+    "/e-commerce/brands": {},
+    "/e-commerce/cart": {},
+    "/e-commerce/categories": {},
+    "/e-commerce/forgot": {},
+    "/e-commerce/home": {},
+    "/e-commerce/login": {},
+    "/e-commerce/products": {},
+    "/e-commerce/register": {},
+    "/e-commerce/wishlist": {}
+  }
+}
