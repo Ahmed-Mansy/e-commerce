@@ -21,11 +21,15 @@ export class BrandsComponent implements OnInit {
   getAllBrandsData(): void {
     this.brandsService.getAllBrands().subscribe({
       next: (res) => {
-
         this.brandsList = res.data
         console.log(this.brandsList);
       }
     })
   }
+
+
+
+
+
 
 }

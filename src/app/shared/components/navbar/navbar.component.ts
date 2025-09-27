@@ -1,4 +1,4 @@
-import { Component, inject, Input, PLATFORM_ID } from '@angular/core';
+import { Component, computed, inject, Input, PLATFORM_ID, Signal, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FlowbiteService } from '../../../core/services/flowbite.service';
 import { initFlowbite } from 'flowbite';
@@ -22,30 +22,29 @@ export class NavbarComponent {
   private readonly cartService = inject(CartService)
   @Input({ required: true }) isLogin: boolean = true;
 
-  cartCount = 0;
+  cartCount: Signal<number> = computed(() => this.cartService.cartCount());
 
   ngOnInit(): void {
 
     this.flowbiteService.loadFlowbite((flowbite) => {
       initFlowbite();
     });
-    this.getCartNumber();
+    // this.getCartNumber();
 
-    if (isPlatformBrowser(this.id)) {
-
+    if (isPlatformBrowser(this.id) && this.isLogin) {
       this.cartService.loadCart();
     }
 
   }
 
 
-  getCartNumber(): void {
-    this.cartService.cartCount$.subscribe({
-      next: (value) => {
-        this.cartCount = value;
-      }
-    })
-  }
+  // getCartNumber(): void {
+  //   this.cartService.cartCount$.subscribe({
+  //     next: (value) => {
+  //       this.cartCount = value;
+  //     }
+  //   })
+  // }
 
 
   signOut(): void {

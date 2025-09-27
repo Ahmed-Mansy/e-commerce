@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { CookieService } from 'ngx-cookie-service';
@@ -11,26 +11,26 @@ export class CartService {
   private readonly httpClient = inject(HttpClient)
   private readonly cookieService = inject(CookieService)
 
-  private cartCount = new BehaviorSubject<number>(0);
-  cartCount$ = this.cartCount.asObservable();
+  cartCount: WritableSignal<number> = signal(0);
+  // cartCount$ = this.cartCount.asObservable();
 
   addToCart(): void {
-    this.cartCount.next(this.cartCount.value + 1)
+    this.cartCount.update((value) => value + 1)
   }
   removeFromCart(): void {
-    this.cartCount.next(this.cartCount.value - 1)
-    if (this.cartCount.value === 0) {
+    this.cartCount.update((value) => value - 1)
+    if (this.cartCount() === 0) {
       this.resetCart()
     }
   }
   resetCart() {
-    this.cartCount.next(0);
+    this.cartCount.set(0);
   }
 
   loadCart(): void {
     this.getLoggedUserCart().subscribe({
       next: (res) => {
-        this.cartCount.next(res.numOfCartItems)
+        this.cartCount.set(res.numOfCartItems)
       }
     })
   }
