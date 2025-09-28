@@ -40,7 +40,7 @@ body {
 
 
 @theme {
-    --breakpoint-xs: 100rem;
+    --breakpoint-xs: 50rem;
 }
 
 @layer components {
