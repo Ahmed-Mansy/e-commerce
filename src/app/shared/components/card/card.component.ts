@@ -2,13 +2,12 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { Product } from '../../../features/home/models/product.interface';
 import { RouterLink } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
-import { OnSalePipe } from '../../pipes/on-sale-pipe';
 import { TermPipe } from '../../pipes/term-pipe';
 import { CartService } from '../../../features/cart/services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { WishlistService } from '../../../features/wish-list/services/wishlist.service';
-import { Wishlist } from '../../../features/wish-list/models/wishlist.interface';
 import { ImageLoader } from '../../directives/image-loader';
+import { Wishlist } from '../../../features/wish-list/models/wishlist.interface';
 
 @Component({
   selector: 'app-card',
@@ -24,13 +23,10 @@ export class CardComponent implements OnInit {
   private readonly toastrService = inject(ToastrService);
   private readonly wishlistService = inject(WishlistService);
 
-  // wishList: Wishlist[] = []
-
 
 
   ngOnInit(): void {
-    // this.loadWishlist()
-    this.wishlistService.loadWishlist();
+
   }
 
   addProductItemToCart(id: string): void {
@@ -94,7 +90,7 @@ export class CardComponent implements OnInit {
 
       this.wishlistService.removeProductFromWishlist(productId).subscribe({
         next: (res) => {
-          this.wishlistService.globalWishlist = res.data;
+
           this.toastrService.info('Removed from Wishlist');
           this.wishlistService.loadWishlist();
         }
@@ -103,7 +99,6 @@ export class CardComponent implements OnInit {
 
       this.wishlistService.addProductToWishlist(productId).subscribe({
         next: (res) => {
-          this.wishlistService.globalWishlist = res.data;
           this.toastrService.success('Added to Wishlist');
           this.wishlistService.loadWishlist();
 
@@ -114,7 +109,9 @@ export class CardComponent implements OnInit {
 
 
   isInWishlist(productId: string): boolean {
-    return this.wishlistService.globalWishlist.some((item: any) => item._id === productId);
+    return this.wishlistService.globalWishlist().some(
+      (item: any) => item._id === productId
+    );
   }
 
 }

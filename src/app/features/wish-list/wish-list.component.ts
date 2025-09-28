@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { WishlistService } from './services/wishlist.service';
 import { Wishlist } from './models/wishlist.interface';
 import { CurrencyPipe } from '@angular/common';
@@ -16,7 +16,10 @@ export class WishListComponent implements OnInit {
   private readonly wishlistService = inject(WishlistService)
   private readonly toastrService = inject(ToastrService)
 
-  wishList: Wishlist[] = []
+  // wishList: Wishlist[] = []
+
+  wishList: WritableSignal<Wishlist[]> = signal([])
+
 
   ngOnInit(): void {
     this.loadWishlist()
@@ -25,8 +28,8 @@ export class WishListComponent implements OnInit {
   loadWishlist() {
     this.wishlistService.laodWishlistData().subscribe({
       next: (res) => {
-        this.wishList = res.data
-        console.log(this.wishList)
+        this.wishList.set(res.data)
+        console.log(this.wishList())
       }
     })
   }

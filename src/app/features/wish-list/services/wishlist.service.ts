@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { Wishlist } from '../models/wishlist.interface';
@@ -11,7 +11,8 @@ export class WishlistService {
 
   private readonly httpClient = inject(HttpClient)
 
-  globalWishlist: Wishlist[] = []
+  // globalWishlist: Wishlist[] = []
+  globalWishlist: WritableSignal<Wishlist[]> = signal([])
 
   addProductToWishlist(id: string): Observable<any> {
     return this.httpClient.post(environment.baseUrl + `wishlist`,
@@ -37,8 +38,7 @@ export class WishlistService {
   loadWishlist() {
     this.laodWishlistData().subscribe({
       next: (res) => {
-        this.globalWishlist = res.data
-        console.log('golbal from Service ', this.globalWishlist)
+        this.globalWishlist.set(res.data)
       }
     })
   }

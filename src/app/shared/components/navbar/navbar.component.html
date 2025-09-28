@@ -14,7 +14,7 @@
             </svg>
         </button>
         <div class="hidden w-full md:flex grow md:w-auto" id="navbar-default">
-            @if (isLogin) {
+            @if (isLoginn()) {
             <ul
                 class="capitalize  md:ms-[10%] lg:ms-[30%] font-medium text-lg flex flex-col p-4 md:p-0 mt-4 border  rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
@@ -43,7 +43,7 @@
             }
             <ul
                 class="capitalize ms-auto font-medium flex flex-row xs:items-center  p-4 md:p-0 mt-4 border  rounded-lg  md:flex-row md:space-x-5 rtl:space-x-reverse md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                @if (isLogin === false) {
+                @if (isLoginn() === false) {
                 <li>
                     <a routerLink='login'
                         class="mainBtn text-mainColor me-5 md:-me-4  hover:text-white px-13 rounded-full  dark:text-white "

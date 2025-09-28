@@ -12,7 +12,7 @@
     </div>
     <div [routerLink]="['/details', product.slug, product.id]" class="cursor-pointer p-3 pb-0">
         <div class="myImg">
-            <div class="img-wrapper">
+            <div class=" xs:h-[200px] img-wrapper md:h-[300px]">
                 <img appImageLoader [src]="product.imageCover" class="w-full rounded" [alt]="product.title"
                     height="150px">
             </div>

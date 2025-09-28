@@ -1,14 +1,14 @@
 <section class="container mx-auto p-6">
     <h1 class="text-3xl font-bold text-center text-mainColor mb-6">Wishlist</h1>
 
-    @if (wishList.length === 0) {
+    @if (wishList().length === 0) {
     <div class="text-center text-gray-500">
         No products in the wishlist
     </div>
     }
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        @for (product of wishList; track product.id) {
+        @for (product of wishList(); track product.id) {
         <div class="bg-white rounded-2xl shadow-md p-4 relative">
             <div class="cursor-pointer" [routerLink]="['/details', product.slug ,product.id]">
                 <!-- Image -->

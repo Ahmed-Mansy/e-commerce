@@ -1,8 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputComponent } from "../../shared/components/input/input.component";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../cart/services/cart.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-checkout',
@@ -14,6 +15,9 @@ export class CheckoutComponent implements OnInit {
 
   private readonly fb = inject(FormBuilder)
   private readonly activatedRoute = inject(ActivatedRoute)
+  private readonly ngxSpinnerService = inject(NgxSpinnerService);
+  private readonly router = inject(Router)
+
   private readonly cartService = inject(CartService)
 
   checkOutForm!: FormGroup
@@ -51,6 +55,7 @@ export class CheckoutComponent implements OnInit {
           console.log(res);
           if (res.status === 'success') {
             window.open(res.session.url, '_self')
+            this.cartService.loadCart();
           }
         },
         error: (err) => {
@@ -62,12 +67,25 @@ export class CheckoutComponent implements OnInit {
       console.log('cash')
       this.cartService.checkoutSessionCash(this.cardId, this.checkOutForm.value).subscribe({
         next: (res) => {
+          if (res.status === 'success') {
+            setTimeout(() => {
+              this.router.navigate(['/allorders'])
+            }, 1000);
+
+            this.cartService.loadCart();
+          }
           console.log(res);
         }
       })
 
     }
+
+    else {
+      this.checkOutForm.markAllAsTouched()
+
+    }
   }
+
 
 
 
