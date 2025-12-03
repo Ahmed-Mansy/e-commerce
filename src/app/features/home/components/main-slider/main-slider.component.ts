@@ -14,13 +14,13 @@ export class MainSliderComponent {
     mouseDrag: true,
     touchDrag: true,
     pullDrag: false,
-    autoplay:true,
-    autoplayTimeout:1500,
-    autoplayHoverPause:true,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    autoplayHoverPause: true,
     dots: true,
     navSpeed: 700,
     navText: ['', ''],
-    items:1,
+    items: 1,
     nav: false
   }
 

@@ -38,9 +38,13 @@ body {
     color: var(--main-color);
 }
 
+button {
+    cursor: pointer;
+}
+
 
 @theme {
-    --breakpoint-xs: 25rem;
+    --breakpoint-xs: 32rem;
 }
 
 @layer components {

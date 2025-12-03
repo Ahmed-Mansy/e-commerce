@@ -1,14 +1,26 @@
 <section class="container mx-auto p-4">
-
     <div class="p-6">
         <h1 class="text-4xl text-center text-mainColor capitalize font-bold mb-10">All Orders</h1>
 
-        @for (order of allOrders; track $index) {
-        <div class="bg-white shadow-lg rounded-2xl p-6 mb-10 border border-gray-200 ">
+        <!-- Orders Count Info -->
+        @if (allOrders.length > 0) {
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+            <p class="text-gray-700 text-center">
+                Showing <span class="font-semibold">{{ startIndex }}</span> to
+                <span class="font-semibold">{{ endIndex }}</span> of
+                <span class="font-semibold">{{ allOrders.length }}</span> orders
+            </p>
+        </div>
+        }
+
+        <!-- Orders List -->
+        @for (order of paginatedOrders; track order._id) {
+        <div class="bg-white shadow-lg rounded-2xl p-6 mb-10 border border-gray-200">
 
             <!-- Order Header -->
-            <h2 class="text-2xl font-semibold text-gray-800 mb-6 border-b pb-2 ">
-                🛒 Order Number <h6 class="text-sm my-2"> #{{ order._id }}</h6>
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6 border-b pb-2">
+                🛒 Order Number
+                <h6 class="text-sm my-2">#{{ order._id }}</h6>
             </h2>
 
             <!-- User Info -->
@@ -32,7 +44,7 @@
             <div class="mb-6">
                 <h3 class="font-semibold text-lg text-mainColor mb-2">📝 Order Summary</h3>
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-gray-700">
-                    <p><span class="font-medium">Total Price:</span> {{ order.totalOrderPrice |currency:'EGP '}} </p>
+                    <p><span class="font-medium">Total Price:</span> {{ order.totalOrderPrice | currency:'EGP ' }}</p>
                     <p><span class="font-medium">Payment Method:</span> {{ order.paymentMethodType }}</p>
                     <p>
                         <span class="font-medium">Status:</span>
@@ -53,11 +65,11 @@
                     @for (item of order.cartItems; track $index) {
                     <div
                         class="bg-amber-50 rounded-xl shadow-md p-4 flex items-center gap-4 hover:shadow-lg transition-shadow duration-300">
-                        <img [src]="item.product.imageCover" alt="{{ item.product.title }}"
+                        <img [src]="item.product.imageCover" [alt]="item.product.title"
                             class="w-20 h-20 object-cover rounded-lg shadow">
                         <div>
                             <p class="font-medium text-gray-800">{{ item.product.title }}</p>
-                            <p class="text-gray-600">Price: {{ item.price |currency:'EGP '}} </p>
+                            <p class="text-gray-600">Price: {{ item.price | currency:'EGP ' }}</p>
                             <p class="text-gray-600">Quantity: {{ item.count }}</p>
                         </div>
                     </div>
@@ -65,8 +77,79 @@
                 </div>
             </div>
 
+        </div>
+        } @empty {
+        <div class="text-center py-12">
+            <p class="text-gray-500 text-lg">No orders found</p>
+        </div>
+        }
 
+        <!-- Pagination Controls -->
+        @if (totalPages > 1) {
+        <div class="flex flex-col items-center gap-4 mt-8 mb-6">
+            <!-- Page Numbers -->
+            <div class="flex items-center gap-2 flex-wrap justify-center">
+                <!-- First Page Button -->
+                <button (click)="goToFirstPage()" [disabled]="isFirstPage"
+                    class="p-2 rounded-lg border border-gray-300 hover:bg-mainColor hover:text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-gray-500 transition-colors"
+                    aria-label="First page">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="11 17 6 12 11 7"></polyline>
+                        <polyline points="18 17 13 12 18 7"></polyline>
+                    </svg>
+                </button>
 
+                <!-- Previous Page Button -->
+                <button (click)="goToPreviousPage()" [disabled]="isFirstPage"
+                    class="p-2 rounded-lg border border-gray-300 hover:bg-mainColor hover:text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-gray-500 transition-colors"
+                    aria-label="Previous page">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+
+                <!-- Page Numbers -->
+                @for (page of getPageNumbers(); track $index) {
+                @if (page === '...') {
+                <span class="px-3 py-2 text-gray-500">...</span>
+                } @else if (isPageNumber(page)) {
+                <button (click)="goToPage(page)" [class]="isPageActive(page)
+                            ? 'bg-mainColor text-white border-mainColor'
+                            : 'border-gray-300 hover:bg-mainColor hover:text-white'"
+                    class="px-4 py-2 rounded-lg border transition-colors">
+                    {{ page }}
+                </button>
+                }
+                }
+
+                <!-- Next Page Button -->
+                <button (click)="goToNextPage()" [disabled]="isLastPage"
+                    class="p-2 rounded-lg border border-gray-300 hover:bg-mainColor hover:text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-gray-500 transition-colors"
+                    aria-label="Next page">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+
+                <!-- Last Page Button -->
+                <button (click)="goToLastPage()" [disabled]="isLastPage"
+                    class="p-2 rounded-lg border border-gray-300 hover:bg-mainColor hover:text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-gray-500 transition-colors"
+                    aria-label="Last page">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="13 17 18 12 13 7"></polyline>
+                        <polyline points="6 17 11 12 6 7"></polyline>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Page Info -->
+            <div class="text-sm text-gray-600">
+                Page {{ currentPage }} of {{ totalPages }}
+            </div>
         </div>
         }
 

@@ -39,3 +39,13 @@ export interface Brand {
   slug: string
   image: string
 }
+export interface IResponse<T> {
+  data: T,
+
+  results: number,
+  metadata: {
+    currentPage: number,
+    numberOfPages: number,
+    limit: number
+  },
+}

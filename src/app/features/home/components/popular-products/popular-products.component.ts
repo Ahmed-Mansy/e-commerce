@@ -9,21 +9,21 @@ import { ProductsService } from '../../services/products.service';
   templateUrl: './popular-products.component.html',
   styleUrl: './popular-products.component.css'
 })
-export class PopularProductsComponent implements OnInit{
+export class PopularProductsComponent implements OnInit {
 
-  
-private readonly productsService = inject(ProductsService)
-productList:Product[] = []
-ngOnInit(): void {
+
+  private readonly productsService = inject(ProductsService)
+  productList: Product[] = []
+  ngOnInit(): void {
     this.getAllProductsData()
-}
+  }
 
-  getAllProductsData():void{
+  getAllProductsData(): void {
     this.productsService.getAllProducts().subscribe({
-      next:(res)=>{
+      next: (res) => {
         this.productList = res.data
       },
-      error:(err)=>{
+      error: (err) => {
         console.log(err)
       }
     })
