@@ -1,93 +1,129 @@
-<nav class="bg-bgColor border-gray-200 fixed top-0 w-full z-[5000] dark:bg-gray-900 myShadow">
-    <div class="max-w-screen-3xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a routerLink='/' class="flex items-center space-x-3 rtl:space-x-reverse">
-            <span
-                class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white capitalize text-mainColor">trendify</span>
+<nav class="fixed top-0 w-full z-[5000] transition-all duration-300"
+    style="background: rgba(248,245,242,0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(139,94,53,0.10); box-shadow: 0 2px 20px rgba(139,94,53,0.08);">
+    <div class="max-w-screen-2xl flex items-center justify-between mx-auto px-6 py-3">
+
+        <!-- Brand -->
+        <a routerLink='/' class="flex items-center gap-2 group">
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-black"
+                style="background: var(--main-gradient);">T</div>
+            <span class="text-xl font-black tracking-tight"
+                style="background: var(--main-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                Trendify
+            </span>
         </a>
+
+        <!-- Mobile toggle -->
         <button data-collapse-toggle="navbar-default" type="button"
-            class="cursor-pointer inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-gray-500 rounded-xl md:hidden hover:bg-amber-50 focus:outline-none focus:ring-2 focus:ring-mainColor/20 transition-all duration-200"
             aria-controls="navbar-default" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
-            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 17 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M1 1h15M1 7h15M1 13h15" />
             </svg>
         </button>
-        <div class="hidden w-full md:flex grow md:w-auto" id="navbar-default">
+
+        <!-- Nav links + actions -->
+        <div class="hidden w-full md:flex md:items-center md:w-auto grow" id="navbar-default">
+
+            <!-- Main nav links (logged in) -->
             @if (isLoginn()) {
-            <ul
-                class="capitalize  md:ms-[10%] lg:ms-[30%] font-medium text-lg flex flex-col p-4 md:p-0 mt-4 border  rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <ul class="flex flex-col md:flex-row md:items-center md:gap-1 md:ms-auto md:me-8 mt-4 md:mt-0">
                 <li>
                     <a routerLink='home' routerLinkActive="active"
-                        class=" block py-2 px-3 text-2ndTextColor hover:text-mainColor rounded-sm md:bg-transparent  md:p-0 dark:text-white"
-                        aria-current="page">home</a>
+                        class="relative block py-2 px-4 text-sm font-medium text-gray-600 hover:text-mainColor rounded-xl hover:bg-amber-50 transition-all duration-200 group">
+                        Home
+                        <span class="absolute bottom-1 left-4 right-4 h-0.5 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+                            style="background: var(--main-gradient);"></span>
+                    </a>
                 </li>
-
                 <li>
                     <a routerLink='products' routerLinkActive="active"
-                        class="block py-2 px-3 text-2ndTextColor hover:text-mainColor rounded-sm md:bg-transparent  md:p-0 dark:text-white"
-                        aria-current="page">products</a>
+                        class="relative block py-2 px-4 text-sm font-medium text-gray-600 hover:text-mainColor rounded-xl hover:bg-amber-50 transition-all duration-200 group">
+                        Products
+                        <span class="absolute bottom-1 left-4 right-4 h-0.5 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+                            style="background: var(--main-gradient);"></span>
+                    </a>
                 </li>
                 <li>
                     <a routerLink='categories' routerLinkActive="active"
-                        class="block py-2 px-3 text-2ndTextColor hover:text-mainColor rounded-sm md:bg-transparent  md:p-0 dark:text-white"
-                        aria-current="page">categories</a>
+                        class="relative block py-2 px-4 text-sm font-medium text-gray-600 hover:text-mainColor rounded-xl hover:bg-amber-50 transition-all duration-200 group">
+                        Categories
+                        <span class="absolute bottom-1 left-4 right-4 h-0.5 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+                            style="background: var(--main-gradient);"></span>
+                    </a>
                 </li>
                 <li>
                     <a routerLink='brands' routerLinkActive="active"
-                        class="block py-2 px-3 text-2ndTextColor hover:text-mainColor rounded-sm md:bg-transparent  md:p-0 dark:text-white"
-                        aria-current="page">brands</a>
+                        class="relative block py-2 px-4 text-sm font-medium text-gray-600 hover:text-mainColor rounded-xl hover:bg-amber-50 transition-all duration-200 group">
+                        Brands
+                        <span class="absolute bottom-1 left-4 right-4 h-0.5 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+                            style="background: var(--main-gradient);"></span>
+                    </a>
                 </li>
-
             </ul>
             }
-            <ul
-                class="capitalize ms-auto font-medium flex flex-row xs:items-center  p-4 md:p-0 mt-4 border  rounded-lg  md:flex-row md:space-x-5 rtl:space-x-reverse md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+
+            <!-- Right-side actions -->
+            <ul class="flex flex-row items-center gap-2 ms-auto mt-4 md:mt-0">
                 @if (isLoginn() === false) {
                 <li>
-                    <a routerLink='login'
-                        class="mainBtn text-mainColor me-5 md:-me-4  hover:text-white px-13 rounded-full  dark:text-white "
-                        aria-current="page">login</a>
+                    <a routerLink='login' class="mainBtn">Login</a>
                 </li>
                 <li>
-                    <a routerLink='register' class="mainBtn2  px-13 rounded-full  dark:text-white"
-                        aria-current="page">register</a>
+                    <a routerLink='register' class="mainBtn2">Register</a>
                 </li>
                 }
                 @else {
-
+                <!-- Wishlist -->
                 <li>
                     <a routerLink='wishlist' routerLinkActive="active"
-                        class="block py-2 px-2 text-2ndTextColor hover:text-mainColor rounded-sm md:bg-transparent  md:p-0 dark:text-white"
-                        aria-current="page">
-                        <i class="fa-regular fa-heart text-2xl "></i>
+                        class="relative flex items-center justify-center w-10 h-10 rounded-xl text-gray-500 hover:text-mainColor hover:bg-amber-50 transition-all duration-200"
+                        title="Wishlist">
+                        <i class="fa-regular fa-heart text-lg"></i>
+                        @if (wishlistCount() > 0) {
+                        <span class="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center text-white text-[10px] font-bold rounded-full animate-pulse"
+                            style="background: var(--main-gradient);">
+                            {{wishlistCount()}}
+                        </span>
+                        }
                     </a>
                 </li>
+
+                <!-- Cart -->
                 <li>
-                    <a routerLink='cart' routerLinkActive="active"
-                        class="block  py-2 px-2 relative text-2ndTextColor hover:text-mainColor rounded-sm md:bg-transparent  md:p-0 dark:text-white"
-                        aria-current="page">
-                        <i class="fas fa-cart-shopping text-2xl"></i>
-                        <div
-                            class="absolute z-10 -top-3 -right-2 bg-white rounded size-5 flex justify-center items-center">
-                            <span class="text-xs text-mainColor font-bold"> {{cartCount()}} </span>
-                        </div>
+                    <a id="nav-cart-icon" routerLink='cart' routerLinkActive="active"
+                        class="relative flex items-center justify-center w-10 h-10 rounded-xl text-gray-500 hover:text-mainColor hover:bg-amber-50 transition-all duration-200"
+                        title="Cart">
+                        <i class="fas fa-cart-shopping text-lg"></i>
+                        @if (cartCount() > 0) {
+                        <span class="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center text-white text-[10px] font-bold rounded-full animate-pulse transition-transform duration-300"
+                            style="background: var(--main-gradient);">
+                            {{cartCount()}}
+                        </span>
+                        }
                     </a>
                 </li>
+
+                <!-- Orders -->
                 <li>
                     <a routerLink='allorders' routerLinkActive="active"
-                        class="block py-2 px-2 text-2ndTextColor hover:text-mainColor rounded-sm md:bg-transparent  md:p-0 dark:text-white"
-                        aria-current="page">
-                        <i class="fa-solid fa-truck text-2xl"></i>
+                        class="relative flex items-center justify-center w-10 h-10 rounded-xl text-gray-500 hover:text-mainColor hover:bg-amber-50 transition-all duration-200"
+                        title="My Orders">
+                        <i class="fa-solid fa-truck text-lg"></i>
                     </a>
                 </li>
+
+                <!-- Sign Out -->
                 <li>
-                    <a (click)="signOut()" class="cursor-pointer hover:text-mainColor  dark:text-white "
-                        aria-current="page">signOut</a>
+                    <button (click)="signOut()"
+                        class="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-red-500 rounded-xl hover:bg-red-50 transition-all duration-200">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span class="hidden sm:inline">Sign Out</span>
+                    </button>
                 </li>
                 }
-
-
             </ul>
         </div>
     </div>

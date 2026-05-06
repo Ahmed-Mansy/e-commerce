@@ -1,75 +1,66 @@
-<div class="relative mb-4 z-0">
+<div class="relative mb-5 z-0">
     <div class="relative">
 
         @if (element === 'input') {
         <input [class]="{
-                'border-green-700': control?.valid,
-                'border-red-700': control?.invalid && control?.touched
+                'border-emerald-500 focus:ring-emerald-500/20': control?.valid && control?.touched,
+                'border-red-400 focus:ring-red-400/20': control?.invalid && control?.touched
                 }" [formControl]="control" [type]="typeInput || ( flag ? 'password' : 'text')" [id]="idInput"
             class="main-input peer" placeholder=" " />
         }
         @else if (element === 'text') {
         <textarea [class]="{
-                'border-green-700': control?.valid,
-                'border-red-700': control?.invalid && control?.touched
-                }" [formControl]="control" [id]="idInput" class="main-input peer" placeholder=" "></textarea>
-
+                'border-emerald-500 focus:ring-emerald-500/20': control?.valid && control?.touched,
+                'border-red-400 focus:ring-red-400/20': control?.invalid && control?.touched
+                }" [formControl]="control" [id]="idInput" class="main-input peer min-h-[100px] resize-none" placeholder=" "></textarea>
         }
 
         <label [class]="{
-                'text-green-700': control?.valid,
-                'text-red-700': control?.invalid && control?.touched
-                }" for="name" class="main-label capitalize"> {{labelInput}} </label>
+                'text-emerald-600': control?.valid && control?.touched,
+                'text-red-500': control?.invalid && control?.touched
+                }" [for]="idInput" class="main-label capitalize"> {{labelInput}} </label>
+
+        @if (control?.valid && control?.touched) {
+        <span class="absolute top-1/2 end-4 -translate-y-1/2 text-emerald-500 pointer-events-none">
+            <i class="fas fa-check-circle text-sm"></i>
+        </span>
+        }
 
         @if (idInput === 'password' || idInput === 'rePassword') {
-        <span (click)="flag = !flag" class="absolute top-1/2 end-4 -translate-1/2 cursor-pointer">
+        <span (click)="flag = !flag" class="absolute top-1/2 end-4 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-mainColor transition-colors duration-200 z-10">
             @if (flag) {
-            <i class="fas fa-eye-slash"></i>
+            <i class="fas fa-eye-slash text-sm"></i>
             }
             @else {
-            <i class="fas fa-eye"></i>
-
+            <i class="fas fa-eye text-sm"></i>
             }
         </span>
         }
     </div>
 
     @if (control?.errors && control?.touched) {
-    <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
-        role="alert">
-
-        <span class="sr-only">Danger</span>
-        <div>
-
-            <ul class="mt-1.5 list-disc list-inside">
-
-                @if (control?.hasError('required')) {
-                <li> Input is required </li>
-                }
-                @if (control?.hasError('minlength')) {
-                <li> Input should be more than or equal 3 char</li>
-                }
-                @if (control?.hasError('maxlength')) {
-                <li> Input should be less than or equal 20 char</li>
-                }
-                @if (control?.hasError('emil')) {
-                <li> Please enter a valid email address</li>
-                }
-                @if (control?.hasError('pattern')) {
-                <li> <ng-content />
-                </li>
-                }
-                @if (control?.hasError('mismatch')) {
-                <li> Password confirmation is incorrect</li>
-                }
-
-
-
-
-
-            </ul>
-        </div>
+    <div class="mt-2 px-3 py-2.5 rounded-lg bg-red-50 border border-red-100 flex items-start gap-2">
+        <i class="fas fa-exclamation-circle text-red-500 text-xs mt-0.5 flex-shrink-0"></i>
+        <ul class="text-xs text-red-600 space-y-0.5">
+            @if (control?.hasError('required')) {
+            <li>This field is required</li>
+            }
+            @if (control?.hasError('minlength')) {
+            <li>Must be at least 3 characters</li>
+            }
+            @if (control?.hasError('maxlength')) {
+            <li>Must be 20 characters or fewer</li>
+            }
+            @if (control?.hasError('email')) {
+            <li>Enter a valid email address</li>
+            }
+            @if (control?.hasError('pattern')) {
+            <li><ng-content /></li>
+            }
+            @if (control?.hasError('mismatch')) {
+            <li>Passwords do not match</li>
+            }
+        </ul>
     </div>
     }
-
 </div>

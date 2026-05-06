@@ -1,38 +1,48 @@
-<div class="card bg-white myShadow relative rounded-2xl ">
-    <div class="size-11 z-50 cursor-pointer rounded-full bg-white absolute top-3 right-3 myShadow myParent"
-        (click)="toggleWishlist(product.id)">
-
+<div class="premium-card group relative">
+    <!-- Wishlist Button -->
+    <button
+        (click)="toggleWishlist(product.id)"
+        class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95"
+        style="box-shadow: 0 2px 10px rgba(0,0,0,0.12);">
         @if (isInWishlist(product.id)) {
-        <i class="fa-solid fa-heart text-2xl text-mainColor  absolute top-1/2 left-1/2 -translate-1/2 "></i>
+        <i class="fa-solid fa-heart text-mainColor text-lg"></i>
         }
-        @if (!isInWishlist(product.id)) {
-        <i class="fa-regular fa-heart text-2xl text-mainColor  absolute top-1/2 left-1/2 -translate-1/2 "></i>
-
+        @else {
+        <i class="fa-regular fa-heart text-gray-400 text-lg group-hover:text-mainColor transition-colors duration-200"></i>
         }
-    </div>
-    <div [routerLink]="['/details', product.slug, product.id]" class="cursor-pointer p-3 pb-0">
-        <div class="myImg">
-            <div class=" xs:h-[160px] img-wrapper md:h-[300px]">
-                <img appImageLoader [src]="product.imageCover" class="w-full rounded" [alt]="product.title">
-            </div>
+    </button>
 
-        </div>
-        <div class="content">
-            <h3 class="font-medium mb-1">{{product.category.name}}</h3>
-            <div class="flex justify-between items-center">
-                <h4 class="my-2 text-sm">{{product.title | term:2}}</h4>
-                <span class="font-medium">
-                    <i class="fas fa-star text-yellow-400"></i>
-                    {{product.ratingsAverage}}
-                </span>
-            </div>
-
+    <!-- Image -->
+    <div [routerLink]="['/details', product.slug, product.id]" class="cursor-pointer overflow-hidden">
+        <div class="h-[200px] md:h-[220px] overflow-hidden">
+            <img appImageLoader [src]="product.imageCover" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108" [alt]="product.title">
         </div>
     </div>
-    <div class="flex justify-between items-center my-2 p-3 pt-0">
-        <span class="font-bold text-mainColor">{{product.price|currency:'EGP '}}</span>
 
-        <span><i (click)="addProductItemToCart(product.id)"
-                class="fa-solid fa-square-plus text-mainColor cursor-pointer text-4xl hover:text-secondColor transition-all duration-300"></i></span>
+    <!-- Content -->
+    <div [routerLink]="['/details', product.slug, product.id]" class="cursor-pointer px-4 pt-3 pb-2">
+        <!-- Category -->
+        <span class="text-xs font-semibold uppercase tracking-wider text-mainColor/70">{{product.category.name}}</span>
+
+        <!-- Title -->
+        <h4 class="text-sm font-semibold text-gray-800 mt-1 mb-2 leading-snug line-clamp-2">{{product.title | term:2}}</h4>
+
+        <!-- Rating + Price row -->
+        <div class="flex items-center justify-between">
+            <span class="text-base font-bold text-gray-900">{{product.price | currency:'EGP '}}</span>
+            <span class="flex items-center gap-1 text-xs text-gray-500 font-medium">
+                <i class="fas fa-star text-amber-400 text-xs"></i>
+                {{product.ratingsAverage}}
+            </span>
+        </div>
+    </div>
+
+    <!-- Add to Cart -->
+    <div class="px-4 pb-4">
+        <button (click)="addProductItemToCart(product.id, $event)"
+            class="btn w-full py-2.5 text-xs flex items-center justify-center gap-2">
+            <i class="fas fa-cart-plus"></i>
+            Add to Cart
+        </button>
     </div>
 </div>

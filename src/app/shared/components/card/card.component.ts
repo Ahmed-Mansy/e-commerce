@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { WishlistService } from '../../../features/wish-list/services/wishlist.service';
 import { ImageLoader } from '../../directives/image-loader';
 import { Wishlist } from '../../../features/wish-list/models/wishlist.interface';
+import { CartAnimationService } from '../../../core/services/cart-animation.service';
 
 @Component({
   selector: 'app-card',
@@ -22,20 +23,22 @@ export class CardComponent implements OnInit {
   private readonly cartService = inject(CartService);
   private readonly toastrService = inject(ToastrService);
   private readonly wishlistService = inject(WishlistService);
-
-
+  private readonly cartAnimationService = inject(CartAnimationService);
 
   ngOnInit(): void {
 
   }
 
-  addProductItemToCart(id: string): void {
+  addProductItemToCart(id: string, event: MouseEvent): void {
+    // Trigger animation immediately
+    this.cartAnimationService.animateToCart(event);
+
     this.cartService.addProductToCart(id).subscribe({
       next: (res) => {
         console.log(res);
 
         if (res.status === "success") {
-          this.cartService.addToCart();
+          this.cartService.cartCount.set(res.numOfCartItems);
           this.toastrService.success(res.message, 'Trendy');
         }
       },

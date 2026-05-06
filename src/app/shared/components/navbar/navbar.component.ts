@@ -26,6 +26,7 @@ export class NavbarComponent {
   // @Input({ required: true }) isLogin: boolean = true;
   isLoginn: InputSignal<boolean> = input(true)
   cartCount: Signal<number> = computed(() => this.cartService.cartCount());
+  wishlistCount: Signal<number> = computed(() => this.wishlistService.globalWishlist().length);
 
   ngOnInit(): void {
 
