@@ -39,7 +39,6 @@ export const routes: Routes = [
             { path: 'categories/subCategories/:id/:slug', component: SubCategoriesComponent, title: 'SubCategory Page' },
             { path: 'brands', component: BrandsComponent, title: 'Brands Page' },
             { path: 'allorders', component: AllordersComponent, title: 'All Orders Page' },
-            { path: 'allorders', component: AllordersComponent, title: 'All Orders Page' },
             { path: 'wishlist', component: WishListComponent, title: 'Wishlist Page' },
             { path: 'checkout/:id', component: CheckoutComponent, title: 'Checkout Page' },
             { path: 'details/:slug/:id', component: DetailsComponent, title: 'Details Page' },
