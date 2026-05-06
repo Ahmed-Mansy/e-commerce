@@ -1,17 +1,28 @@
-<section>
+<section class="relative overflow-hidden">
     <owl-carousel-o [options]="mainOptions">
         <ng-template carouselSlide>
-            <img src="/images/ms-1.avif" class="w-full h-40 md:h-auto " alt="">
+            <div class="relative">
+                <img src="/images/ms-1.avif" class="w-full h-48 md:h-[500px] object-cover" alt="Collection 1">
+                <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
+            </div>
         </ng-template>
         <ng-template carouselSlide>
-            <img src="/images/ms-2.avif" class="w-full h-40 md:h-auto" alt="">
+            <div class="relative">
+                <img src="/images/ms-2.avif" class="w-full h-48 md:h-[500px] object-cover" alt="Collection 2">
+                <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
+            </div>
         </ng-template>
         <ng-template carouselSlide>
-            <img src="/images/ms-3.avif" class="w-full h-40 md:h-auto" alt="">
+            <div class="relative">
+                <img src="/images/ms-3.avif" class="w-full h-48 md:h-[500px] object-cover" alt="Collection 3">
+                <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
+            </div>
         </ng-template>
         <ng-template carouselSlide>
-            <img src="/images/ms-4.avif" class="w-full h-40 md:h-auto" alt="">
+            <div class="relative">
+                <img src="/images/ms-4.avif" class="w-full h-48 md:h-[500px] object-cover" alt="Collection 4">
+                <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
+            </div>
         </ng-template>
-
     </owl-carousel-o>
 </section>

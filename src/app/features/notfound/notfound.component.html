@@ -1,8 +1,42 @@
-<section class="flex flex-col items-center justify-center h-[80vh] text-center">
-    <h1 class="text-7xl font-bold text-mainColor mb-4">404</h1>
-    <p class="text-gray-600 text-xl mb-6">Oops! The page you're looking for doesn't exist.</p>
-    <a routerLink=""
-        class="cursor-pointer px-6 py-3 bg-mainColor text-white rounded-2xl shadow hover:bg-secondColor transition-all">
-        Back to Home
-    </a>
+<section class="min-h-[85vh] flex flex-col items-center justify-center text-center px-4 relative overflow-hidden">
+
+    <!-- Decorative background circles -->
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-5 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+        style="background: var(--main-gradient);"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full opacity-5 translate-x-1/2 translate-y-1/2 pointer-events-none"
+        style="background: var(--main-gradient);"></div>
+
+    <!-- 404 text -->
+    <div class="relative mb-4">
+        <h1 class="text-[160px] md:text-[220px] font-black leading-none select-none"
+            style="background: var(--main-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0.15;">
+            404
+        </h1>
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="w-24 h-24 rounded-3xl flex items-center justify-center"
+                style="background: rgba(139,94,53,0.1);">
+                <i class="fas fa-compass text-4xl text-mainColor animate-spin" style="animation-duration: 6s;"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-3">Page not found</h2>
+    <p class="text-gray-500 text-base mb-8 max-w-md">
+        Oops! The page you're looking for has gone exploring. Let us take you back to familiar territory.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-3 items-center">
+        <a routerLink="/home"
+            class="btn px-8 py-3.5 text-base inline-flex items-center gap-2">
+            <i class="fas fa-home"></i>
+            Back to Home
+        </a>
+        <a routerLink="/products"
+            class="mainBtn px-8 py-3.5 text-base inline-flex items-center gap-2">
+            <i class="fas fa-shopping-bag"></i>
+            Browse Products
+        </a>
+    </div>
+
 </section>

@@ -1,11 +1,31 @@
-<section class="container mx-auto p-10">
-    <div class="container mx-auto  ">
-        <p class="text-center text-mainColor text-2xl">products</p>
-        <h2 class="text-4xl capitalize text-center my-4 font-bold">best selling Products</h2>
-        <div class="parent pt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+<section class="py-16" style="background: #F8F5F2;">
+    <div class="container mx-auto px-6">
+
+        <!-- Section header -->
+        <div class="flex items-end justify-between mb-10">
+            <div>
+                <p class="text-sm font-semibold text-mainColor uppercase tracking-widest mb-2">Featured</p>
+                <h2 class="section-title">Best Selling Products</h2>
+            </div>
+            <a routerLink="/products"
+                class="hidden sm:flex items-center gap-2 text-sm font-semibold text-mainColor hover:text-secondColor transition-colors duration-200 group">
+                View all
+                <i class="fas fa-arrow-right text-xs transition-transform duration-200 group-hover:translate-x-1"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
             @for (product of productList.slice(0,10); track product.id) {
             <app-card [product]="product" />
             }
         </div>
+
+        <!-- Mobile CTA -->
+        <div class="mt-8 text-center sm:hidden">
+            <a routerLink="/products" class="btn px-8 py-3 inline-flex items-center gap-2">
+                View All Products <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
     </div>
 </section>

@@ -2,11 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../core/auth/services/auth.service';
 import { OrdersService } from './services/orders.service';
 import { Order } from './models/order.interface';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, SlicePipe } from '@angular/common';
+import { CartService } from '../cart/services/cart.service';
 
 @Component({
   selector: 'app-allorders',
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, SlicePipe],
   templateUrl: './allorders.component.html',
   styleUrl: './allorders.component.css'
 })
@@ -14,6 +15,7 @@ export class AllordersComponent implements OnInit {
 
   private readonly authService = inject(AuthService)
   private readonly ordersService = inject(OrdersService)
+  private readonly cartService = inject(CartService) // Inject CartService
 
   userId!: string | null
   allOrders: Order[] = []
@@ -25,14 +27,19 @@ export class AllordersComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllOrders();
+    this.cartService.loadCart(); // Refresh cart count (clears it if we just checked out)
   }
 
   getAllOrders(): void {
     this.ordersService.getUserOrders(this.authService.decodeToken()).subscribe({
       next: (res) => {
-        this.allOrders = res
-        this.totalPages = Math.ceil(this.allOrders.length / this.ordersPerPage)
-        console.log(this.allOrders);
+        // Ensure res is an array and sort by newest first
+        const orders = Array.isArray(res) ? res : [];
+        this.allOrders = orders.sort((a, b) => {
+          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        });
+        
+        this.totalPages = Math.ceil(this.allOrders.length / this.ordersPerPage);
       },
       error: (err) => {
         console.log(err)

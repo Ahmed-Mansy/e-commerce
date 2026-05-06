@@ -1,76 +1,101 @@
-<section class="container mx-auto p-4">
-    <div class="p-6">
-        <h1 class="text-4xl text-center text-mainColor capitalize font-bold mb-10">All Orders</h1>
+<section class="py-12 px-4 md:px-8">
+    <div class="container mx-auto">
 
-        <!-- Orders Count Info -->
-        @if (allOrders.length > 0) {
-        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-            <p class="text-gray-700 text-center">
-                Showing <span class="font-semibold">{{ startIndex }}</span> to
-                <span class="font-semibold">{{ endIndex }}</span> of
-                <span class="font-semibold">{{ allOrders.length }}</span> orders
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <p class="text-sm font-semibold text-mainColor uppercase tracking-widest mb-2">History</p>
+            <h1 class="text-4xl font-black text-gray-900 mb-1">My Orders</h1>
+            @if (allOrders.length > 0) {
+            <p class="text-gray-500 text-sm">
+                Showing {{startIndex}}–{{endIndex}} of {{allOrders.length}} orders
             </p>
+            }
         </div>
-        }
 
-        <!-- Orders List -->
+        <!-- Orders -->
         @for (order of paginatedOrders; track order._id) {
-        <div class="bg-white shadow-lg rounded-2xl p-6 mb-10 border border-gray-200">
+        <div class="bg-white rounded-2xl mb-6 overflow-hidden" style="box-shadow: var(--card-shadow);">
 
-            <!-- Order Header -->
-            <h2 class="text-2xl font-semibold text-gray-800 mb-6 border-b pb-2">
-                🛒 Order Number
-                <h6 class="text-sm my-2">#{{ order._id }}</h6>
-            </h2>
-
-            <!-- User Info -->
-            <div class="mb-6">
-                <h3 class="font-semibold text-lg text-mainColor mb-2">👤 User Info</h3>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-gray-700">
-                    <p><span class="font-medium">Name:</span> {{ order.user.name }}</p>
-                    <p><span class="font-medium">Email:</span> {{ order.user.email }}</p>
-                    <p><span class="font-medium">Phone:</span> {{ order.user.phone }}</p>
+            <!-- Order card header -->
+            <div class="flex flex-wrap items-center justify-between gap-4 px-6 py-4 border-b border-gray-50">
+                <div>
+                    <p class="text-xs text-gray-400 uppercase tracking-widest mb-0.5">Order ID</p>
+                    <h2 class="text-sm font-bold text-gray-700 font-mono">#{{order._id | slice:0:16}}...</h2>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span [class]="order.isPaid ? 'badge-success' : 'badge-error'">
+                        <i [class]="order.isPaid ? 'fas fa-check-circle' : 'fas fa-times-circle'"></i>
+                        {{order.isPaid ? 'Paid' : 'Unpaid'}}
+                    </span>
+                    <span [class]="order.isDelivered ? 'badge-success' : 'badge-warning'">
+                        <i [class]="order.isDelivered ? 'fas fa-box-open' : 'fas fa-truck'"></i>
+                        {{order.isDelivered ? 'Delivered' : 'In Transit'}}
+                    </span>
+                    <span class="badge-info">
+                        <i class="fas fa-credit-card"></i>
+                        {{order.paymentMethodType}}
+                    </span>
                 </div>
             </div>
 
-            <!-- Shipping Address -->
-            <div class="mb-6">
-                <h3 class="font-semibold text-lg text-mainColor mb-2">📦 Shipping Address</h3>
-                <p class="text-gray-700">{{ order.shippingAddress.details }}, {{ order.shippingAddress.city }}</p>
-                <p class="text-gray-700 mt-2">Phone: {{ order.shippingAddress.phone }}</p>
-            </div>
+            <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            <!-- Order Summary -->
-            <div class="mb-6">
-                <h3 class="font-semibold text-lg text-mainColor mb-2">📝 Order Summary</h3>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-gray-700">
-                    <p><span class="font-medium">Total Price:</span> {{ order.totalOrderPrice | currency:'EGP ' }}</p>
-                    <p><span class="font-medium">Payment Method:</span> {{ order.paymentMethodType }}</p>
-                    <p>
-                        <span class="font-medium">Status:</span>
-                        <span [class]="order.isPaid ? 'text-green-600 font-medium' : 'text-red-600 font-medium'">
-                            {{ order.isPaid ? 'Paid' : 'Not Paid' }}
-                        </span> /
-                        <span [class]="order.isDelivered ? 'text-green-600 font-medium' : 'text-red-600 font-medium'">
-                            {{ order.isDelivered ? 'Delivered' : 'Not Delivered' }}
-                        </span>
-                    </p>
+                <!-- User info -->
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3 flex items-center gap-1.5">
+                        <i class="fas fa-user text-mainColor/60"></i> Customer
+                    </h3>
+                    <div class="space-y-1.5">
+                        <p class="text-sm text-gray-700"><span class="font-semibold">Name:</span> {{order.user.name}}</p>
+                        <p class="text-sm text-gray-700 break-all"><span class="font-semibold">Email:</span> {{order.user.email}}</p>
+                        <p class="text-sm text-gray-700"><span class="font-semibold">Phone:</span> {{order.user.phone}}</p>
+                    </div>
                 </div>
+
+                <!-- Shipping -->
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3 flex items-center gap-1.5">
+                        <i class="fas fa-map-marker-alt text-mainColor/60"></i> Shipping
+                    </h3>
+                    <div class="space-y-1.5">
+                        <p class="text-sm text-gray-700">{{order.shippingAddress.details}}</p>
+                        <p class="text-sm text-gray-700">{{order.shippingAddress.city}}</p>
+                        <p class="text-sm text-gray-700">{{order.shippingAddress.phone}}</p>
+                    </div>
+                </div>
+
+                <!-- Summary -->
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3 flex items-center gap-1.5">
+                        <i class="fas fa-receipt text-mainColor/60"></i> Summary
+                    </h3>
+                    <div class="space-y-1.5">
+                        <p class="text-sm text-gray-700">
+                            <span class="font-semibold">Total:</span>
+                            <span class="text-mainColor font-bold ml-1">{{order.totalOrderPrice | currency:'EGP '}}</span>
+                        </p>
+                        <p class="text-sm text-gray-700">
+                            <span class="font-semibold">Items:</span> {{order.cartItems.length}}
+                        </p>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Products -->
-            <div>
-                <h3 class="font-semibold text-lg text-mainColor mb-3">🛍️ Products</h3>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Products row -->
+            <div class="px-6 pb-6">
+                <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4 flex items-center gap-1.5">
+                    <i class="fas fa-shopping-bag text-mainColor/60"></i> Products
+                </h3>
+                <div class="flex gap-4 overflow-x-auto pb-1">
                     @for (item of order.cartItems; track $index) {
-                    <div
-                        class="bg-amber-50 rounded-xl shadow-md p-4 flex items-center gap-4 hover:shadow-lg transition-shadow duration-300">
+                    <div class="flex-shrink-0 flex items-center gap-3 bg-gray-50 rounded-xl p-3 w-64">
                         <img [src]="item.product.imageCover" [alt]="item.product.title"
-                            class="w-20 h-20 object-cover rounded-lg shadow">
-                        <div>
-                            <p class="font-medium text-gray-800">{{ item.product.title }}</p>
-                            <p class="text-gray-600">Price: {{ item.price | currency:'EGP ' }}</p>
-                            <p class="text-gray-600">Quantity: {{ item.count }}</p>
+                            class="w-14 h-14 rounded-lg object-cover flex-shrink-0">
+                        <div class="min-w-0">
+                            <p class="text-xs font-semibold text-gray-800 line-clamp-2 leading-snug">{{item.product.title}}</p>
+                            <p class="text-xs text-mainColor font-bold mt-1">{{item.price | currency:'EGP '}}</p>
+                            <p class="text-xs text-gray-400">Qty: {{item.count}}</p>
                         </div>
                     </div>
                     }
@@ -79,77 +104,72 @@
 
         </div>
         } @empty {
-        <div class="text-center py-12">
-            <p class="text-gray-500 text-lg">No orders found</p>
+        <div class="flex flex-col items-center justify-center py-20 text-center">
+            <div class="w-24 h-24 rounded-3xl flex items-center justify-center mb-6"
+                style="background: rgba(139,94,53,0.08);">
+                <i class="fas fa-box text-4xl text-mainColor/30"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">No orders yet</h3>
+            <p class="text-gray-500 text-sm mb-6">Start shopping to see your order history here.</p>
+            <a routerLink="/products" class="btn px-8 py-3 inline-flex items-center gap-2">
+                <i class="fas fa-shopping-bag"></i> Start Shopping
+            </a>
         </div>
         }
 
-        <!-- Pagination Controls -->
+        <!-- Pagination -->
         @if (totalPages > 1) {
-        <div class="flex flex-col items-center gap-4 mt-8 mb-6">
-            <!-- Page Numbers -->
-            <div class="flex items-center gap-2 flex-wrap justify-center">
-                <!-- First Page Button -->
+        <div class="flex flex-col items-center gap-4 mt-8">
+            <div class="flex items-center gap-2">
                 <button (click)="goToFirstPage()" [disabled]="isFirstPage"
-                    class="p-2 rounded-lg border border-gray-300 hover:bg-mainColor hover:text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-gray-500 transition-colors"
-                    aria-label="First page">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    class="w-9 h-9 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500 hover:border-mainColor hover:text-mainColor disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="11 17 6 12 11 7"></polyline>
                         <polyline points="18 17 13 12 18 7"></polyline>
                     </svg>
                 </button>
 
-                <!-- Previous Page Button -->
                 <button (click)="goToPreviousPage()" [disabled]="isFirstPage"
-                    class="p-2 rounded-lg border border-gray-300 hover:bg-mainColor hover:text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-gray-500 transition-colors"
-                    aria-label="Previous page">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    class="w-9 h-9 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500 hover:border-mainColor hover:text-mainColor disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="15 18 9 12 15 6"></polyline>
                     </svg>
                 </button>
 
-                <!-- Page Numbers -->
                 @for (page of getPageNumbers(); track $index) {
                 @if (page === '...') {
-                <span class="px-3 py-2 text-gray-500">...</span>
+                <span class="w-9 h-9 flex items-center justify-center text-gray-400 text-sm">…</span>
                 } @else if (isPageNumber(page)) {
-                <button (click)="goToPage(page)" [class]="isPageActive(page)
-                            ? 'bg-mainColor text-white border-mainColor'
-                            : 'border-gray-300 hover:bg-mainColor hover:text-white'"
-                    class="px-4 py-2 rounded-lg border transition-colors">
-                    {{ page }}
+                <button (click)="goToPage(page)"
+                    [class]="isPageActive(page)
+                        ? 'w-9 h-9 rounded-xl border-2 border-mainColor text-white text-sm font-bold transition-all duration-200'
+                        : 'w-9 h-9 rounded-xl border border-gray-200 text-gray-600 text-sm hover:border-mainColor hover:text-mainColor transition-all duration-200'"
+                    [style]="isPageActive(page) ? 'background: var(--main-gradient)' : ''">
+                    {{page}}
                 </button>
                 }
                 }
 
-                <!-- Next Page Button -->
                 <button (click)="goToNextPage()" [disabled]="isLastPage"
-                    class="p-2 rounded-lg border border-gray-300 hover:bg-mainColor hover:text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-gray-500 transition-colors"
-                    aria-label="Next page">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    class="w-9 h-9 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500 hover:border-mainColor hover:text-mainColor disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="9 18 15 12 9 6"></polyline>
                     </svg>
                 </button>
 
-                <!-- Last Page Button -->
                 <button (click)="goToLastPage()" [disabled]="isLastPage"
-                    class="p-2 rounded-lg border border-gray-300 hover:bg-mainColor hover:text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-gray-500 transition-colors"
-                    aria-label="Last page">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    class="w-9 h-9 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500 hover:border-mainColor hover:text-mainColor disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="13 17 18 12 13 7"></polyline>
                         <polyline points="6 17 11 12 6 7"></polyline>
                     </svg>
                 </button>
             </div>
-
-            <!-- Page Info -->
-            <div class="text-sm text-gray-600">
-                Page {{ currentPage }} of {{ totalPages }}
-            </div>
+            <p class="text-sm text-gray-400">Page {{currentPage}} of {{totalPages}}</p>
         </div>
         }
 

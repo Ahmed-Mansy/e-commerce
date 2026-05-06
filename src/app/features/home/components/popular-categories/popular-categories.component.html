@@ -1,18 +1,31 @@
-<section class="py-14">
-    <div class="container mx-auto">
-        <h2 class="text-4xl capitalize mb-4">shop popular categorires</h2>
-        <owl-carousel-o [options]="categroriesOptions">
+<section class="py-16">
+    <div class="container mx-auto px-6">
 
+        <!-- Section header -->
+        <div class="flex items-end justify-between mb-10">
+            <div>
+                <p class="text-sm font-semibold text-mainColor uppercase tracking-widest mb-2">Browse</p>
+                <h2 class="section-title">Popular Categories</h2>
+            </div>
+        </div>
+
+        <owl-carousel-o [options]="categroriesOptions">
             @for (category of categoriesList; track category._id) {
             <ng-template carouselSlide [id]="category._id">
-                <div class="border border-mainColor rounded p-2  ">
-                    <img [src]="category.image" [alt]="category.name" [title]="category.slug"
-                        class="w-full h-[150px] md:h-[250px]">
-                    <h3 class="mt-2">{{category.name}}</h3>
+                <div class="premium-card group cursor-pointer mx-2">
+                    <div class="overflow-hidden">
+                        <img [src]="category.image" [alt]="category.name" [title]="category.slug"
+                            class="w-full h-[180px] object-cover transition-transform duration-500 group-hover:scale-108">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-sm font-bold text-gray-800 truncate">{{category.name}}</h3>
+                        <p class="text-xs text-mainColor mt-1 flex items-center gap-1">
+                            Shop now <i class="fas fa-arrow-right text-[10px]"></i>
+                        </p>
+                    </div>
                 </div>
             </ng-template>
             }
-
         </owl-carousel-o>
     </div>
 </section>
