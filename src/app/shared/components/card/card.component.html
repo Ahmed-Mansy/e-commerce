@@ -14,7 +14,7 @@
 
     <!-- Image -->
     <div [routerLink]="['/details', product.slug, product.id]" class="cursor-pointer overflow-hidden">
-        <div class="h-[200px] md:h-[220px] overflow-hidden">
+        <div class="h-[160px] md:h-[220px] overflow-hidden">
             <img appImageLoader [src]="product.imageCover" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108" [alt]="product.title">
         </div>
     </div>
@@ -29,7 +29,7 @@
 
         <!-- Rating + Price row -->
         <div class="flex items-center justify-between">
-            <span class="text-base font-bold text-gray-900">{{product.price | currency:'EGP '}}</span>
+            <span class="text-sm md:text-base font-bold text-gray-900">{{product.price | currency:'EGP '}}</span>
             <span class="flex items-center gap-1 text-xs text-gray-500 font-medium">
                 <i class="fas fa-star text-amber-400 text-xs"></i>
                 {{product.ratingsAverage}}
@@ -40,7 +40,7 @@
     <!-- Add to Cart -->
     <div class="px-4 pb-4">
         <button (click)="addProductItemToCart(product.id, $event)"
-            class="btn w-full py-2.5 text-xs flex items-center justify-center gap-2">
+            class="btn w-full py-2.5 text-[10px] md:text-xs flex items-center justify-center gap-2">
             <i class="fas fa-cart-plus"></i>
             Add to Cart
         </button>

@@ -83,7 +83,7 @@
                     <!-- Price -->
                     <div class="flex flex-col gap-1 mb-8">
                         <div class="flex items-baseline gap-3">
-                            <span class="text-4xl font-black" style="color: var(--main-color);">
+                            <span class="text-2xl md:text-4xl font-black" style="color: var(--main-color);">
                                 {{productDetails.price | currency:'EGP '}}
                             </span>
                             @if (productDetails.priceAfterDiscount) {
@@ -111,7 +111,7 @@
                         <!-- Actions -->
                         <div class="flex gap-4 mb-8">
                             <button (click)="addProductItemToCart(productDetails.id, $event)"
-                                class="btn flex-1 py-4 text-base font-bold flex items-center justify-center gap-3 transition-transform duration-200 hover:-translate-y-1">
+                                class="btn flex-1 py-4 text-sm md:text-base font-bold flex items-center justify-center gap-3 transition-transform duration-200 hover:-translate-y-1">
                                 <i class="fas fa-cart-plus text-lg"></i>
                                 Add to Cart
                             </button>

@@ -25,7 +25,7 @@
                     <app-input [element]="'text'" [control]="checkOutForm.get('shippingAddress')?.get('details')"
                         [idInput]="'details'" [labelInput]="'Address details'"></app-input>
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <app-input [element]="'input'" [control]="checkOutForm.get('shippingAddress')?.get('phone')"
                             [idInput]="'phone'" [typeInput]="'tel'" [labelInput]="'Phone'">
                             Accept only Egypt numbers
@@ -42,7 +42,7 @@
                         Payment Method
                     </h2>
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <button (click)="submitForm($event)" id="visa"
                             class="group flex flex-col items-center gap-3 p-5 rounded-xl border-2 border-gray-200 hover:border-mainColor hover:bg-amber-50 transition-all duration-200 cursor-pointer">
                             <i class="fas fa-credit-card text-2xl text-gray-400 group-hover:text-mainColor transition-colors duration-200"></i>
