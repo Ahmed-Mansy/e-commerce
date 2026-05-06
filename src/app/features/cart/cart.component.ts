@@ -18,7 +18,7 @@ export class CartComponent implements OnInit, OnDestroy {
   private readonly toastrService = inject(ToastrService)
   private readonly ngxSpinnerService = inject(NgxSpinnerService)
 
-  cartDetails: Cart = {} as Cart
+  cartDetails: Cart = { products: [] } as unknown as Cart
 
 
   ngOnInit(): void {

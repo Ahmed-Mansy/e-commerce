@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductDetailsService } from './services/product-details.service';
 import { Product } from '../home/models/product.interface';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
@@ -11,7 +11,7 @@ import { CartAnimationService } from '../../core/services/cart-animation.service
 
 @Component({
   selector: 'app-details',
-  imports: [CarouselModule, CurrencyPipe],
+  imports: [CarouselModule, CurrencyPipe, RouterLink],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })
@@ -69,7 +69,7 @@ export class DetailsComponent implements OnInit {
 
   addProductItemToCart(id: string, event: MouseEvent): void {
     this.cartAnimationService.animateToCart(event);
-    
+
     this.cartService.addProductToCart(id).subscribe({
       next: (res) => {
         if (res.status === "success") {
