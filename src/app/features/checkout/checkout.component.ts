@@ -52,7 +52,7 @@ export class CheckoutComponent implements OnInit {
       console.log('visa')
       this.cartService.checkoutSessionVisa(this.cardId, this.checkOutForm.value).subscribe({
         next: (res) => {
-          console.log(res);
+          console.log(`helllo here >>>>>`, res);
           if (res.status === 'success') {
             window.open(res.session.url, '_self')
             this.cartService.loadCart();
